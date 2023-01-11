@@ -2,11 +2,11 @@ import json
 import requests
 import pandas as pd
 
-def option_current_df() -> pd.DataFrame:
+def current_option() -> pd.DataFrame:
     """
     东方财富网-行情中心-期权市场
     http://quote.eastmoney.com/center
-    :return: 期权价格
+    :return: all option information in the whole option market
     :rtype: pandas.DataFrame
     """
     url = 'http://98.push2.eastmoney.com/api/qt/clist/get'
@@ -98,5 +98,5 @@ def option_current_df() -> pd.DataFrame:
     return temp_df
 
 if __name__ == '__main__':
-    option_daily_hist_df = option_current_df()
-    print(option_daily_hist_df)
+    option_hist_df = current_option()
+    print(option_hist_df)
