@@ -60,5 +60,5 @@ if __name__ == "__main__":
     bond_china_yield_df = bond_china_yield(
         start_date="20221209", end_date="20221209"
     )
-    print(bond_china_yield_df.iloc[0])
+    print(bond_china_yield_df)
 
