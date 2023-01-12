@@ -2,7 +2,7 @@
 This repository aims to provide real-time option data and yield data, including common bond yield, shibor, lpr...
 
 
-## Function
+## Required Function
 1. Exchange information: return supported exchange  name
 2. Trading option varieties: return supported option name
 3. Option data: return option data given exchange name or underlying code/name
