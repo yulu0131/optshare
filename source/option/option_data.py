@@ -30,13 +30,13 @@ def get_ccfex_option(underlying_symbol=None) -> pd.DataFrame:
         params = {**variety, **params}
 
         if underlying_symbol == '000300':
-            params.update(variety='1', _='1673514935737')
+            params.update(variety='1')
 
         elif underlying_symbol == '000852':
-            params.update(variety='2', _='1673515386524')
+            params.update(variety='2')
 
         elif underlying_symbol == '000016':
-            params.update(variety='3', _='1673515482877')
+            params.update(variety='3')
 
         else:
             raise Exception('Wrong Underlying Symbol!')
@@ -76,7 +76,32 @@ def get_ccfex_option(underlying_symbol=None) -> pd.DataFrame:
 
     return ccfex_df
 
-def get_commodity_option(exchange_name = None, underlying_symbol=None) -> pd.DataFrame:
+
+def commodity_option_variety(exchange_name) -> dict:
+    """
+    commodity option variety given exchange name
+    :param exchange_name: 'shfe', 'dce', 'czce'
+    :rtype: str
+    :return: numbered commodity option variety given exchange name
+    :rtype: dict
+    """
+
+    if exchange_name == 'shfe':
+        symbols = ['cu', 'ru', 'au', 'al', 'zn', 'rb', 'ag']
+    elif exchange_name == 'dce':
+        symbols = ['m', 'c', 'i', 'pg', 'pp', 'v', 'l', 'p', 'a', 'b', 'y']
+    elif exchange_name == 'czce':
+        symbols = ['SR', 'CF', 'MA', 'TA', 'RM', 'ZC', 'OI', 'PK']
+    else:
+        raise Exception('Unsupported Exchange Name!')
+
+    n = len(symbols)
+    numbers = list(range(1, n + 1))
+    variety_dictionary = {symbols[i]: str(numbers[i]) for i in range(len(symbols))}
+    return variety_dictionary
+
+
+def get_commodity_option(exchange_name=None, underlying_symbol=None) -> pd.DataFrame:
     """
     东方财富网-行情中心-期权市场
     https://quote.eastmoney.com/center
@@ -99,68 +124,35 @@ def get_commodity_option(exchange_name = None, underlying_symbol=None) -> pd.Dat
         'blockName': 'callback',
         '_': '1673576240696'
     }
-    
+
     if exchange_name is not None and underlying_symbol is None:
-        if exchange_name == 'shfe':
-            url = url + 'SHFEOPTION'
-
-        elif exchange_name == 'dce':
-            url = url + 'DCEOPTION'
-            params.update(_ = '1673578133884')
-        elif exchange_name == 'czce':
-            url = url +'CZCEOPTION'
-            params.update(_='1673578133904')
-
-        elif exchange_name == 'ine':
-            url = url + 'INEOPTION'
-            params.update(_='1673578133929')
+        if exchange_name in ['shfe', 'dce', 'czce', 'ine']:
+            url = url + exchange_name.upper() + 'OPTION'
 
         else:
             raise Exception("Wrong Exchange Name Input!")
 
     elif exchange_name is None and underlying_symbol is not None:
-        url = url+ 'variety/'
+        url = url + 'variety/'
+        shfe_varity = commodity_option_variety('shfe')
+        dce_varity = commodity_option_variety('dce')
+        czce_variety = commodity_option_variety('czce')
 
-        if underlying_symbol == 'cu':
-            url = url+'SHFEOPTION/1'
-            params.update(_='1673580273083')
+        if underlying_symbol in ['cu', 'ru']:
+            url = url + 'SHFEOPTION/' + shfe_varity[underlying_symbol]
 
-        elif underlying_symbol == 'ru':
-            url = url+'SHFEOPTION/2'
-            params.update(_='1673580273136')
+        elif underlying_symbol in ['au', 'al', 'zn', 'rb', 'ag']:
+            url = url + '151/' + shfe_varity[underlying_symbol]
 
-        elif underlying_symbol == 'au':
-            url = url+'151/3'
-            params.update(_='1673580273148')
+        elif underlying_symbol in ['m', 'c', 'i', 'pg', 'pp', 'v', 'l', 'p', 'a', 'b', 'y']:
+            url = url + 'DCEOPTION/' + dce_varity[underlying_symbol]
 
-        elif underlying_symbol == 'al':
-            url = url+'151/4'
-            params.update(_='1673580273155')
+        elif underlying_symbol in ['SR', 'CF', 'TA', 'MA', 'RM', 'OI', 'PK']:
+            url = url + 'CZCEOPTION/' + czce_variety[underlying_symbol]
 
-        elif underlying_symbol == 'zn':
-            url = url+'151/5'
-            params.update(_='1673580273159')
+        elif underlying_symbol == 'sc':
+            url = url + 'INEOPTION/1'
 
-        elif underlying_symbol == 'rb':
-            url = url+'151/6'
-            params.update(_='1673580273162')
-
-        elif underlying_symbol == 'ag':
-            url = url+'151/7'
-            params.update(_='1673580273168')
-
-        # dce_underlying_symbols = ['m', 'c', 'i', 'pg', 'pp', 'v', 'l', 'p', 'a', 'b', 'y']
-        elif underlying_symbol == 'm':
-            url = url+'DCEOPTION/1'
-            params.update(_ = '1673587179838')
-
-        elif underlying_symbol == 'c':
-            url = url+'DCEOPTION/2'
-            params.update(_ = '1673587179838')
-
-        elif underlying_symbol == 'm':
-            url = url+'DCEOPTION/1'
-            params.update(_ = '1673587179838')
     else:
         raise Exception('Please Enter Either Exchange Name or Underlying Symbol!')
 
@@ -170,18 +162,18 @@ def get_commodity_option(exchange_name = None, underlying_symbol=None) -> pd.Dat
     temp_df = pd.DataFrame(data_json['list'])
 
     option_df = pd.DataFrame(columns=['代码',
-                                     '名称',
-                                     '最新价',
-                                     '涨跌额',
-                                     '涨跌幅',
-                                     '成交量',
-                                     '成交额',
-                                     '持仓量',
-                                     '行权价',
-                                     '剩余日',
-                                     '日增',
-                                     '昨结',
-                                     '今开'])
+                                      '名称',
+                                      '最新价',
+                                      '涨跌额',
+                                      '涨跌幅',
+                                      '成交量',
+                                      '成交额',
+                                      '持仓量',
+                                      '行权价',
+                                      '剩余日',
+                                      '日增',
+                                      '昨结',
+                                      '今开'])
 
     option_df['代码'] = temp_df['dm']
     option_df['名称'] = temp_df['name']
@@ -197,12 +189,13 @@ def get_commodity_option(exchange_name = None, underlying_symbol=None) -> pd.Dat
 
     return option_df
 
+
 def get_current_option(underlying_code=None, exchange_name=None) -> pd.DataFrame:
     """
     东方财富网-行情中心-期权市场
     https://quote.eastmoney.com/center
     :param underlying_code:
-    :param exchange_name: 'she', ''
+    :param exchange_name: 'sse', ''
     :return: optin information given underlying code or exchange name, if neither of them are given, return all current trading options
     :rtype: panda.DataFrame
     """
@@ -225,51 +218,43 @@ def get_current_option(underlying_code=None, exchange_name=None) -> pd.DataFrame
     if underlying_code is None and exchange_name is None:
         url = 'https://98.push2.eastmoney.com/api/qt/clist/get'
 
-    #could use else instead of elif, and add raise exception in conditional else
     elif underlying_code is None and exchange_name is not None:
         if exchange_name == 'ccfex':
             return get_ccfex_option()
 
         elif exchange_name == 'sse':
-            params.update(cb='jQuery1124010207212922928854_1673574036024', fs='m:10', _='1673574036025')
+            params.update(fs='m:10')
 
         elif exchange_name == 'szse':
-            params.update(cb='jQuery1124010207212922928854_1673574036020', fs='m:12', _='1673574036037')
+            params.update(fs='m:12')
 
         elif exchange_name in ['shfe', 'dce', 'czce', 'ine']:
-            return get_commodity_option(exchange_name = exchange_name)
+            return get_commodity_option(exchange_name=exchange_name)
 
         else:
             raise Exception('Wrong Exchange Name Input!')
 
     elif underlying_code is not None and exchange_name is None:
+
         # equity
-        if underlying_code == '510050':
-            params.update(cb='jQuery1124010207212922928854_1673574036020', fs='m:10+c:510050', _='1673574036045')
+        # underlying code in sse
+        if underlying_code in ['510050', '510300', '510500']:
+            params.update(fs='m:10+c:' + underlying_code)
 
-        elif underlying_code == '510300':
-            params.update(cb='jQuery1124010207212922928854_1673574036024', fs='m:10+c:510300', _='1673574036065')
+        # underlying code in szse
+        elif underlying_code in ['159919', '159922', '159915']:
+            params.update(fs='m:12+c:' + underlying_code)
 
-        elif underlying_code == '510500':
-            params.update(cb='jQuery1124010207212922928854_1673574036024', fs='m:10+c:510500', _='1673574036100')
-
-        elif underlying_code == '159919':
-            params.update(cb='jQuery1124010207212922928854_1673574036024', fs='m:12+c:159919', _='1673574036148')
-
-        elif underlying_code == '159922':
-            params.update(cb='jQuery1124010207212922928854_1673574036024', fs='m:12+c:159922', _='1673574036157')
-
-        elif underlying_code == '159915':
-            params.update(cb='jQuery1124010207212922928854_1673574036024', fs='m:12+c:159915', _='1673574036176')
-
-        elif underlying_code == '000300' or '000016' or '000852':
+        # underlying code in ccfex
+        elif underlying_code in ['000300', '000016', '000852']:
             return get_ccfex_option(underlying_code)
 
-        # commodity
-
-
         else:
-            raise Exception('Wrong Underlying Code Input!')
+            try:
+                return get_commodity_option(underlying_symbol=underlying_code)
+
+            except ValueError:
+                raise Exception('Wrong Underlying Code!')
 
     else:
         raise Exception('Unsupported Underlying Symbol or Exchange Name!')
@@ -348,15 +333,21 @@ def get_current_option(underlying_code=None, exchange_name=None) -> pd.DataFrame
 
 
 if __name__ == '__main__':
-    shfe_underlying_symbols = ['cu','ru','au','al','zn','rb','ag']
-    dce_underlying_symbols = ['m', 'c', 'i', 'pg', 'pp', 'v', 'l', 'p', 'a', 'b', 'y']
-    exchange_strs = ['shfe', 'dce', 'czce', 'ine']
-    test_df = get_commodity_option(underlying_symbol = 'c')
-    print(test_df)
-    # for shfe_underlying_symbol in shfe_underlying_symbols:
-    #     test_df = get_commodity_option(underlying_symbol=shfe_underlying_symbol)
-    #     test_df.to_csv(shfe_underlying_symbol + '_test_df.csv')
-    # for exchange in exchange_strs:
-    #     test_df = get_current_option(exchange_name=exchange)
-    #     print(test_df)
+    all_exchange_strs = ['sse', 'ccfex', 'szse', 'shfe', 'dce', 'czce', 'ine']
+    for exchange in all_exchange_strs:
+        test_df = get_current_option(exchange_name=exchange)
+        print(test_df)
+
+    sse_symbols = ['510050', '510300', '510500']
+    szse_symbols = ['159919', '159922', '159915']
+    ccfex_symbols = ['000300', '000016', '000852']
+    shfe_symbols = ['cu', 'ru', 'au', 'al', 'zn', 'rb', 'ag']
+    dce_symbols = ['m', 'c', 'i', 'pg', 'pp', 'v', 'l', 'p', 'a', 'b', 'y']
+    czce_symbols = ['SR', 'CF', 'TA', 'MA', 'RM', 'OI', 'PK']
+    ine_symbols = ['sc']
+    all_symbols = sse_symbols + szse_symbols + ccfex_symbols + shfe_symbols + dce_symbols + czce_symbols + ine_symbols
+    commodity_symbols = shfe_symbols + dce_symbols + czce_symbols + ine_symbols
+    for symbol in all_symbols:
+        test_df = get_current_option(underlying_code=symbol)
+        print(test_df)
 
