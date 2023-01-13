@@ -6,7 +6,7 @@ def current_etf_option(exchange_name) -> pd.DataFrame:
     """
     东方财富网-行情中心-期权市场
     http://quote.eastmoney.com/center
-    :param exchange_name: 'she', or 'szse'
+    :param exchange_name: 'sse', 'szse', 'ccfex',
     :return: current etf option information given selected exchange name
     :rtype: pandas.DataFrame
     """
