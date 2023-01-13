@@ -234,10 +234,5 @@ def index_zh_a_hist_min(
 
 
 if __name__ == "__main__":
-    index_df = index_zh_a_hist_min(
-        symbol="000300",
-        period="1",
-        start_date="1977-05-08 09:30:00",
-        end_date="2022-08-08 15:00:00",
-    )
+    index_df = index_code_id_map()
     print(index_df)

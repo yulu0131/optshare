@@ -1,8 +1,6 @@
 import pandas as pd
 
 option_info = pd.read_csv('option_info.csv')
-
-
 def get_exchange_info() -> pd.DataFrame:
     """
     Exchange Information
