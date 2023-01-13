@@ -253,7 +253,7 @@ def get_current_option(underlying_code=None, exchange_name=None) -> pd.DataFrame
             try:
                 return get_commodity_option(underlying_symbol=underlying_code)
 
-            except ValueError:
+            except:
                 raise Exception('Wrong Underlying Code!')
 
     else:
@@ -333,11 +333,13 @@ def get_current_option(underlying_code=None, exchange_name=None) -> pd.DataFrame
 
 
 if __name__ == '__main__':
+    # return exchange dataframe
     all_exchange_strs = ['sse', 'ccfex', 'szse', 'shfe', 'dce', 'czce', 'ine']
     for exchange in all_exchange_strs:
         test_df = get_current_option(exchange_name=exchange)
         print(test_df)
 
+    # return dataframe given each underlying symbol
     sse_symbols = ['510050', '510300', '510500']
     szse_symbols = ['159919', '159922', '159915']
     ccfex_symbols = ['000300', '000016', '000852']
