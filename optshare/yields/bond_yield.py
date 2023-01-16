@@ -42,17 +42,9 @@ def bond_china_yield(
     data_df['30年'] = pd.to_numeric(data_df['30年'])
     data_df.sort_values('日期', inplace=True)
     data_df.reset_index(inplace=True, drop=True)
-    data_df.rename(columns={'日期': 'maturity_date',
-                            '3月': '0.25',
-                            '6月': '0.50',
-                            '1年': '1.0',
-                            '3年': '3.0',
-                            '5年': '5.0',
-                            '7年': '7.0',
-                            '10年': '10.0',
-                            '30年': '30.0'}, inplace=True)
 
     return data_df
+
 
 
 if __name__ == "__main__":

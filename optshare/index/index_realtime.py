@@ -7,7 +7,7 @@ def index_code_id_map() -> dict:
     :return: 股票和市场代码
     :rtype: dict
     """
-    url = "http://80.push2.eastmoney.com/api/qt/clist/get"
+    url = "https://80.push2.eastmoney.com/api/qt/clist/get"
     params = {
         "pn": "1",
         "pz": "5000",
@@ -233,6 +233,10 @@ def index_zh_a_hist_min(
         return temp_df
 
 
+
 if __name__ == "__main__":
     index_df = index_code_id_map()
+    f = open('index_df.txt', 'w')
+    f.write(str(index_df))
+    f.close()
     print(index_df)
