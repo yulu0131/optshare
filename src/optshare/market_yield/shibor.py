@@ -10,7 +10,8 @@ def get_shibor(start_date, end_date) -> pd.DataFrame:
     :rtype: str, 'yyyymmdd'
     :param end_date: end date
     :rtype: str, 'yyyymmdd'
-    :return: shibor yield data with term structure given start date and end date
+    :return: shibor market_yield data with term structure given start date and end date
+    :rtype: pandas.DataFrame
     """
     try:
         url = "https://www.shibor.org/ags/ms/cm-u-bk-shibor/ShiborHis"
@@ -62,7 +63,8 @@ def get_lpr(start_date, end_date) -> pd.DataFrame:
     :rtype: str, 'yyyymmdd'
     :param end_date: end date
     :rtype: str, 'yyyymmdd'
-    :return: LPR yield data with term structure given start date and end date
+    :return: LPR market_yield data with term structure given start date and end date
+    :rtype: pandas.DataFrame
     """
     try:
         url = "https://www.shibor.org/ags/ms/cm-u-bk-currency/LprHis"

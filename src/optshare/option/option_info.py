@@ -1,6 +1,7 @@
 import pandas as pd
+import os
 
-option_info = pd.read_csv('option_info.csv')
+option_info = pd.read_csv(os.path.join(os.path.dirname(__file__), "option_info.csv"))
 def get_exchange_info() -> pd.DataFrame:
     """
     Exchange Information
