@@ -17,9 +17,9 @@ setup(
     ],
     keywords='derivatives, finance',
     license='Free for non-commercial use',
-    author='Yield Chain Developers',
-    author_email='dev@yieldchain.com',
-    url='http://www.yieldchain.com/',
+    author='Yu Lu',
+    author_email='luyudso@gmail.com',
+    url='https://yulu0131.github.io/',
     # these may change frequently
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
