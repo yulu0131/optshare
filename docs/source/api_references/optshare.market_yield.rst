@@ -17,10 +17,3 @@ optshare.market\_yield.shibor
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: optshare.market_yield
-   :members:
-   :undoc-members:
-   :show-inheritance:

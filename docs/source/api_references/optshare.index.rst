@@ -8,11 +8,3 @@ optshare.index.index\_data
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: optshare.index
-   :members:
-   :undoc-members:
-   :show-inheritance:

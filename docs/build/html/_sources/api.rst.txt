@@ -3,4 +3,4 @@ Api
 ==================
 
 .. toctree::
-    api_references/modules
+    api_references/optshare

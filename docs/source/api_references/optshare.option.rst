@@ -16,11 +16,3 @@ optshare.option.option\_info
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: optshare.option
-   :members:
-   :undoc-members:
-   :show-inheritance:
