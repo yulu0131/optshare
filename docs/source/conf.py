@@ -12,7 +12,6 @@
 
 import os
 import sys
-from optshare import __version__ as v
 
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../../src/'))
@@ -24,7 +23,7 @@ copyright = '2023, Yu Lu'
 author = 'Yu Lu'
 
 # The full version, including alpha/beta/rc tags
-release = v
+release = '0.1.2'
 
 
 # -- General configuration ---------------------------------------------------
