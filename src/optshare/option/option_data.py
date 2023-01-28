@@ -4,13 +4,17 @@ import pandas as pd
 
 
 def get_ccfex_option(underlying_symbol=None) -> pd.DataFrame:
-    """
-    东方财富网-行情中心-期权市场
-    https://quote.eastmoney.com/center
-    :param underlying_symbol: ccfex underlying symbol, e.g. '000300', '000852', '000016'
-    :rtype: str or None
-    :return: current ccfex option information
-    :rtype: pandas.DataFrame
+    """ 东方财富网-行情中心-期权市场 https://quote.eastmoney.com/center
+
+    Parameters
+    ----------
+    underlying_symbol : str or None
+        ccfex underlying symbol, e.g. '000300', '000852', '000016'
+
+    Returns
+    -----------
+    pandas.DataFrame
+        current ccfex option information
     """
 
     url = 'https://futsseapi.eastmoney.com/list/option/221'
@@ -79,11 +83,15 @@ def get_ccfex_option(underlying_symbol=None) -> pd.DataFrame:
 
 def commodity_option_variety(exchange_name) -> dict:
     """
-    commodity option variety given exchange name
-    :param exchange_name: 'shfe', 'dce', 'czce'
-    :rtype: str
-    :return: numbered commodity option variety given exchange name
-    :rtype: dict
+    Parameters
+    ----------
+    exchange_name : str
+        'shfe', 'dce', 'czce'
+
+    Returns
+    -----------
+    dict
+        numbered commodity option variety given exchange name
     """
 
     if exchange_name == 'shfe':
@@ -102,15 +110,19 @@ def commodity_option_variety(exchange_name) -> dict:
 
 
 def get_commodity_option(exchange_name=None, underlying_symbol=None) -> pd.DataFrame:
-    """
-    东方财富网-行情中心-期权市场
-    https://quote.eastmoney.com/center
-    :param exchange_name: exchange name, e.g. 'shfe', 'dce', 'czce', 'ine'
-    :rtype: str or None
-    :param underlying_symbol: underlying symbol
-    :rtype: str or None
-    :return: current commodity option information given either exchange name or underlying_symbol
-    :rtype: pandas.DataFrame
+    """ 东方财富网-行情中心-期权市场 https://quote.eastmoney.com/center
+
+    Parameters
+    ----------
+    exchange_name : str or None
+        exchange name, e.g. 'shfe', 'dce', 'czce', 'ine'
+    underlying_symbol: str or None
+        underlying symbol
+
+    Returns
+    -----------
+    pandas.DataFrame
+        current commodity option information given either exchange name or underlying_symbol
     """
 
     url = 'https://futsseapi.eastmoney.com/list/'
@@ -191,14 +203,21 @@ def get_commodity_option(exchange_name=None, underlying_symbol=None) -> pd.DataF
 
 
 def get_current_option(underlying_code=None, exchange_name=None) -> pd.DataFrame:
+    """ 东方财富网-行情中心-期权市场 https://quote.eastmoney.com/center
+
+    Parameters
+    ----------
+    underlying_code: str or None
+        option underlying code
+    exchange_name: str or None
+        exchange name, e.g. 'ccfex'
+
+    Returns
+    -----------
+    pandas.DataFrame
+        option information given underlying code or exchange name, if neither of them are given, return all current trading options
     """
-    东方财富网-行情中心-期权市场
-    https://quote.eastmoney.com/center
-    :param underlying_code:
-    :param exchange_name: 'sse', ''
-    :return: optin information given underlying code or exchange name, if neither of them are given, return all current trading options
-    :rtype: panda.DataFrame
-    """
+
     url = 'https://66.push2.eastmoney.com/api/qt/clist/get'
     params = {
         'cb': 'jQuery11240028745663294216683_1673331486150',

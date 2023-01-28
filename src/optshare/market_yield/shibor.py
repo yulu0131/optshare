@@ -1,24 +1,29 @@
 import requests
 import json
 import pandas as pd
-def get_shibor(start_date, end_date) -> pd.DataFrame:
-    """
-    target website: https://www.shibor.org/shibor/
+
+def get_shibor(start_date: str = '20220201', end_date: str = '20230101') -> pd.DataFrame:
+    """ target website: https://www.shibor.org/shibor/
     Warning: end_date - start date < one year
-    Return Daily shibor data given time period
-    :param start_date: start date
-    :rtype: str, 'yyyymmdd'
-    :param end_date: end date
-    :rtype: str, 'yyyymmdd'
-    :return: shibor market_yield data with term structure given start date and end date
-    :rtype: pandas.DataFrame
+
+    Parameters
+    -----------------
+    start_date: str, 'yyyymmdd'
+        start date
+    end_date: str, 'yyyymmdd'
+        end date
+
+    Returns
+    -----------------
+    pandas.DataFrame
+        shibor market_yield data with term structure given start date and end date
     """
     try:
         url = "https://www.shibor.org/ags/ms/cm-u-bk-shibor/ShiborHis"
         params = {
             'lang': 'cn',
             'startDate': '-'.join([start_date[:4], start_date[4:6], start_date[6:]]),
-            'endDate': '-'.join([end_date[:4], end_date[4:6], end_date[6:]]),}
+            'endDate': '-'.join([end_date[:4], end_date[4:6], end_date[6:]]), }
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
         }
@@ -54,17 +59,22 @@ def get_shibor(start_date, end_date) -> pd.DataFrame:
     except:
         raise Exception("Data only provided for one year or less!")
 
-def get_lpr(start_date, end_date) -> pd.DataFrame:
-    """
-    target website: https://www.shibor.org/shibor/
+
+def get_lpr(start_date: str = '20220201', end_date: str = '20230101') -> pd.DataFrame:
+    """ target website: https://www.shibor.org/shibor/
     Warning: end_date - start date < one year
-    Return Daily lpr data given time period
-    :param start_date: start date
-    :rtype: str, 'yyyymmdd'
-    :param end_date: end date
-    :rtype: str, 'yyyymmdd'
-    :return: LPR market_yield data with term structure given start date and end date
-    :rtype: pandas.DataFrame
+
+    Parameters
+    ------------------
+    start_date: str, 'yyyymmdd'
+        start date
+    end_date: str, 'yyyymmdd'
+        end date
+
+    Returns
+    ------------------
+    pandas.DataFrame
+        LPR market_yield data with term structure given start date and end date
     """
     try:
         url = "https://www.shibor.org/ags/ms/cm-u-bk-currency/LprHis"
@@ -97,9 +107,8 @@ def get_lpr(start_date, end_date) -> pd.DataFrame:
         raise Exception("Data only provided for one year or less!")
 
 
-
 if __name__ == '__main__':
-    test_shibor_df = get_shibor(start_date='20230101', end_date='20230113')
+    test_shibor_df = get_shibor()
     print(test_shibor_df)
-    test_lpr_df = get_lpr(start_date = '20220201', end_date='20221230')
+    test_lpr_df = get_lpr()
     print(test_lpr_df)

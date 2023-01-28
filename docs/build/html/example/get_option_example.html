@@ -1,0 +1,2112 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>期权示例 &mdash; optshare 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="收益率相关数据" href="get_yield_example.html" />
+    <link rel="prev" title="指数相关数据" href="get_index_example.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> optshare
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Example</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="get_index_example.html">指数相关数据</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">期权示例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#获取期权数据">获取期权数据</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#返回当前场内期权数据">返回当前场内期权数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#指定交易所名称，返回当前交易所的期权数据">指定交易所名称，返回当前交易所的期权数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#根据挂钩标的代码，返回当前挂钩该标的的期权信息">根据挂钩标的代码，返回当前挂钩该标的的期权信息</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Option-information">Option information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#支持的交易所名称以及字母简写">支持的交易所名称以及字母简写</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#支持的期权品种">支持的期权品种</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#根据交易所名称，返回相应的期权信息">根据交易所名称，返回相应的期权信息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">根据交易所名称，返回相应的期权信息</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="get_yield_example.html">收益率相关数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">Api</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">optshare</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../usage.html">Example</a> &raquo;</li>
+        
+      <li>期权示例</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/example/get_option_example.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="期权示例">
+<h1>期权示例<a class="headerlink" href="#期权示例" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optshare</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="获取期权数据">
+<h2>获取期权数据<a class="headerlink" href="#获取期权数据" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="返回当前场内期权数据">
+<h3>返回当前场内期权数据<a class="headerlink" href="#返回当前场内期权数据" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_current_option</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>代码</th>
+      <th>名称</th>
+      <th>最新价</th>
+      <th>涨跌额</th>
+      <th>涨跌幅</th>
+      <th>成交量</th>
+      <th>成交额</th>
+      <th>持仓量</th>
+      <th>行权价</th>
+      <th>剩余日</th>
+      <th>日增</th>
+      <th>昨结</th>
+      <th>今开</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a2305p4500</td>
+      <td>豆一23年05月沽4500</td>
+      <td>50.0</td>
+      <td>49.5</td>
+      <td>9900.00</td>
+      <td>1.0</td>
+      <td>500.0</td>
+      <td>183.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.5</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>i2305p510</td>
+      <td>铁矿石23年05月沽510</td>
+      <td>3.0</td>
+      <td>2.9</td>
+      <td>2900.00</td>
+      <td>1.0</td>
+      <td>300.0</td>
+      <td>745.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>v2305c9000</td>
+      <td>PVC23年05月购9000</td>
+      <td>12.5</td>
+      <td>12.0</td>
+      <td>2400.00</td>
+      <td>4.0</td>
+      <td>247.0</td>
+      <td>211.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.5</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>v2305c9200</td>
+      <td>PVC23年05月购9200</td>
+      <td>12.0</td>
+      <td>11.5</td>
+      <td>2300.00</td>
+      <td>23.0</td>
+      <td>1280.0</td>
+      <td>133.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-7.0</td>
+      <td>0.5</td>
+      <td>10.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>p2305c12600</td>
+      <td>棕榈油23年05月购12600</td>
+      <td>9.5</td>
+      <td>9.0</td>
+      <td>1800.00</td>
+      <td>2407.0</td>
+      <td>197575.0</td>
+      <td>12173.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1360.0</td>
+      <td>0.5</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>11963</th>
+      <td>y2303p8100</td>
+      <td>豆油23年03月沽8100</td>
+      <td>0.5</td>
+      <td>-2.0</td>
+      <td>-80.00</td>
+      <td>133.0</td>
+      <td>1135.0</td>
+      <td>742.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-80.0</td>
+      <td>2.5</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>11964</th>
+      <td>y2303p8400</td>
+      <td>豆油23年03月沽8400</td>
+      <td>3.0</td>
+      <td>-13.5</td>
+      <td>-81.82</td>
+      <td>942.0</td>
+      <td>46570.0</td>
+      <td>630.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>148.0</td>
+      <td>16.5</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>11965</th>
+      <td>SR303P5400</td>
+      <td>白糖23年03月沽5400</td>
+      <td>0.5</td>
+      <td>-2.5</td>
+      <td>-83.33</td>
+      <td>656.0</td>
+      <td>6560.0</td>
+      <td>5193.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-82.0</td>
+      <td>3.0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>11966</th>
+      <td>y2303p8300</td>
+      <td>豆油23年03月沽8300</td>
+      <td>1.5</td>
+      <td>-8.0</td>
+      <td>-84.21</td>
+      <td>874.0</td>
+      <td>19995.0</td>
+      <td>7134.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-32.0</td>
+      <td>9.5</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>11967</th>
+      <td>v2309c7000</td>
+      <td>PVC23年09月购7000</td>
+      <td>40.0</td>
+      <td>-312.5</td>
+      <td>-88.65</td>
+      <td>1.0</td>
+      <td>200.0</td>
+      <td>9.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>352.5</td>
+      <td>40.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>11968 rows × 13 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="指定交易所名称，返回当前交易所的期权数据">
+<h3>指定交易所名称，返回当前交易所的期权数据<a class="headerlink" href="#指定交易所名称，返回当前交易所的期权数据" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_current_option</span><span class="p">(</span><span class="n">exchange_name</span> <span class="o">=</span> <span class="s1">&#39;ccfex&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>代码</th>
+      <th>名称</th>
+      <th>最新价</th>
+      <th>涨跌额</th>
+      <th>涨跌幅</th>
+      <th>成交量</th>
+      <th>成交额</th>
+      <th>持仓量</th>
+      <th>行权价</th>
+      <th>剩余日</th>
+      <th>日增</th>
+      <th>昨结</th>
+      <th>今开</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>IO2301-P-3800</td>
+      <td>沪深300沽23年1月3800</td>
+      <td>0.4</td>
+      <td>0.2</td>
+      <td>100.0%</td>
+      <td>12</td>
+      <td>480.0</td>
+      <td>3748</td>
+      <td>3800.0</td>
+      <td>2</td>
+      <td>6</td>
+      <td>0.2</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>IO2301-P-3850</td>
+      <td>沪深300沽23年1月3850</td>
+      <td>0.4</td>
+      <td>0.2</td>
+      <td>100.0%</td>
+      <td>7</td>
+      <td>280.0</td>
+      <td>2458</td>
+      <td>3850.0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0.2</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>HO2301-P-2425</td>
+      <td>上证50沽23年1月2425</td>
+      <td>0.4</td>
+      <td>0.2</td>
+      <td>100.0%</td>
+      <td>6</td>
+      <td>240.0</td>
+      <td>530</td>
+      <td>2425.0</td>
+      <td>2</td>
+      <td>6</td>
+      <td>0.2</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MO2301-C-7000</td>
+      <td>中证1000购23年1月7000</td>
+      <td>1.4</td>
+      <td>0.6</td>
+      <td>75.0%</td>
+      <td>9</td>
+      <td>960.0</td>
+      <td>1151</td>
+      <td>7000.0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0.8</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>MO2301-C-6900</td>
+      <td>中证1000购23年1月6900</td>
+      <td>1.8</td>
+      <td>0.6</td>
+      <td>50.0%</td>
+      <td>64</td>
+      <td>12300.0</td>
+      <td>1125</td>
+      <td>6900.0</td>
+      <td>2</td>
+      <td>-3</td>
+      <td>1.2</td>
+      <td>1.8</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>681</th>
+      <td>HO2301-P-2750</td>
+      <td>上证50沽23年1月2750</td>
+      <td>1.0</td>
+      <td>-0.6</td>
+      <td>-37.5%</td>
+      <td>16</td>
+      <td>1800.0</td>
+      <td>1577</td>
+      <td>2750.0</td>
+      <td>2</td>
+      <td>-6</td>
+      <td>1.6</td>
+      <td>1.4</td>
+    </tr>
+    <tr>
+      <th>682</th>
+      <td>IO2301-P-4050</td>
+      <td>沪深300沽23年1月4050</td>
+      <td>1.6</td>
+      <td>-1.0</td>
+      <td>-38.46%</td>
+      <td>53</td>
+      <td>7580.0</td>
+      <td>2628</td>
+      <td>4050.0</td>
+      <td>2</td>
+      <td>-27</td>
+      <td>2.6</td>
+      <td>1.6</td>
+    </tr>
+    <tr>
+      <th>683</th>
+      <td>MO2301-P-5500</td>
+      <td>中证1000沽23年1月5500</td>
+      <td>0.2</td>
+      <td>-0.2</td>
+      <td>-50.0%</td>
+      <td>1</td>
+      <td>20.0</td>
+      <td>142</td>
+      <td>5500.0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>684</th>
+      <td>HO2301-P-2700</td>
+      <td>上证50沽23年1月2700</td>
+      <td>0.2</td>
+      <td>-0.2</td>
+      <td>-50.0%</td>
+      <td>20</td>
+      <td>400.0</td>
+      <td>2013</td>
+      <td>2700.0</td>
+      <td>2</td>
+      <td>-20</td>
+      <td>0.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>685</th>
+      <td>MO2301-P-6300</td>
+      <td>中证1000沽23年1月6300</td>
+      <td>0.6</td>
+      <td>-0.6</td>
+      <td>-50.0%</td>
+      <td>16</td>
+      <td>680.0</td>
+      <td>1918</td>
+      <td>6300.0</td>
+      <td>2</td>
+      <td>-2</td>
+      <td>1.2</td>
+      <td>0.4</td>
+    </tr>
+  </tbody>
+</table>
+<p>686 rows × 13 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="根据挂钩标的代码，返回当前挂钩该标的的期权信息">
+<h3>根据挂钩标的代码，返回当前挂钩该标的的期权信息<a class="headerlink" href="#根据挂钩标的代码，返回当前挂钩该标的的期权信息" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 权益类</span>
+<span class="n">optshare</span><span class="o">.</span><span class="n">get_current_option</span><span class="p">(</span><span class="n">underlying_code</span> <span class="o">=</span><span class="s1">&#39;000300&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>代码</th>
+      <th>名称</th>
+      <th>最新价</th>
+      <th>涨跌额</th>
+      <th>涨跌幅</th>
+      <th>成交量</th>
+      <th>成交额</th>
+      <th>持仓量</th>
+      <th>行权价</th>
+      <th>剩余日</th>
+      <th>日增</th>
+      <th>昨结</th>
+      <th>今开</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>IO2301-P-3800</td>
+      <td>沪深300沽23年1月3800</td>
+      <td>0.4</td>
+      <td>0.2</td>
+      <td>100.0%</td>
+      <td>19</td>
+      <td>760.0</td>
+      <td>3741</td>
+      <td>3800.0</td>
+      <td>2</td>
+      <td>-1</td>
+      <td>0.2</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>IO2302-P-3450</td>
+      <td>沪深300沽23年2月3450</td>
+      <td>2.2</td>
+      <td>0.6</td>
+      <td>37.5%</td>
+      <td>1</td>
+      <td>220.0</td>
+      <td>195</td>
+      <td>3450.0</td>
+      <td>30</td>
+      <td>1</td>
+      <td>1.6</td>
+      <td>2.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>IO2302-P-3350</td>
+      <td>沪深300沽23年2月3350</td>
+      <td>1.8</td>
+      <td>0.4</td>
+      <td>28.57%</td>
+      <td>13</td>
+      <td>2120.0</td>
+      <td>253</td>
+      <td>3350.0</td>
+      <td>30</td>
+      <td>13</td>
+      <td>1.4</td>
+      <td>1.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>IO2302-P-3650</td>
+      <td>沪深300沽23年2月3650</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>25.0%</td>
+      <td>147</td>
+      <td>72160.0</td>
+      <td>1621</td>
+      <td>3650.0</td>
+      <td>30</td>
+      <td>133</td>
+      <td>4.0</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>IO2301-C-4350</td>
+      <td>沪深300购23年1月4350</td>
+      <td>1.2</td>
+      <td>0.2</td>
+      <td>20.0%</td>
+      <td>6</td>
+      <td>720.0</td>
+      <td>998</td>
+      <td>4350.0</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1.0</td>
+      <td>1.2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>269</th>
+      <td>IO2303-P-3700</td>
+      <td>沪深300沽23年3月3700</td>
+      <td>10.8</td>
+      <td>-1.0</td>
+      <td>-8.47%</td>
+      <td>13</td>
+      <td>13900.0</td>
+      <td>845</td>
+      <td>3700.0</td>
+      <td>58</td>
+      <td>2</td>
+      <td>11.8</td>
+      <td>10.6</td>
+    </tr>
+    <tr>
+      <th>270</th>
+      <td>IO2301-C-4200</td>
+      <td>沪深300购23年1月4200</td>
+      <td>10.6</td>
+      <td>-1.4</td>
+      <td>-11.67%</td>
+      <td>839</td>
+      <td>1071880.0</td>
+      <td>3372</td>
+      <td>4200.0</td>
+      <td>2</td>
+      <td>348</td>
+      <td>12.0</td>
+      <td>13.8</td>
+    </tr>
+    <tr>
+      <th>271</th>
+      <td>IO2301-P-4100</td>
+      <td>沪深300沽23年1月4100</td>
+      <td>8.8</td>
+      <td>-1.2</td>
+      <td>-12.0%</td>
+      <td>610</td>
+      <td>459900.0</td>
+      <td>3205</td>
+      <td>4100.0</td>
+      <td>2</td>
+      <td>102</td>
+      <td>10.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>272</th>
+      <td>IO2301-P-4050</td>
+      <td>沪深300沽23年1月4050</td>
+      <td>2.0</td>
+      <td>-0.6</td>
+      <td>-23.08%</td>
+      <td>84</td>
+      <td>13020.0</td>
+      <td>2646</td>
+      <td>4050.0</td>
+      <td>2</td>
+      <td>-9</td>
+      <td>2.6</td>
+      <td>1.6</td>
+    </tr>
+    <tr>
+      <th>273</th>
+      <td>IO2301-P-4000</td>
+      <td>沪深300沽23年1月4000</td>
+      <td>0.6</td>
+      <td>-0.2</td>
+      <td>-25.0%</td>
+      <td>147</td>
+      <td>7800.0</td>
+      <td>4270</td>
+      <td>4000.0</td>
+      <td>2</td>
+      <td>-44</td>
+      <td>0.8</td>
+      <td>0.6</td>
+    </tr>
+  </tbody>
+</table>
+<p>274 rows × 13 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 商品类，以铜期权为例</span>
+<span class="n">optshare</span><span class="o">.</span><span class="n">get_current_option</span><span class="p">(</span><span class="n">underlying_code</span> <span class="o">=</span><span class="s1">&#39;cu&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>代码</th>
+      <th>名称</th>
+      <th>最新价</th>
+      <th>涨跌额</th>
+      <th>涨跌幅</th>
+      <th>成交量</th>
+      <th>成交额</th>
+      <th>持仓量</th>
+      <th>行权价</th>
+      <th>剩余日</th>
+      <th>日增</th>
+      <th>昨结</th>
+      <th>今开</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>cu2304P52000</td>
+      <td>沪铜23年04月沽52000</td>
+      <td>36.0</td>
+      <td>34.0</td>
+      <td>1700.0%</td>
+      <td>2</td>
+      <td>4980.0</td>
+      <td>568</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>2.0</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>cu2303P55000</td>
+      <td>沪铜23年03月沽55000</td>
+      <td>20.0</td>
+      <td>18.0</td>
+      <td>900.0%</td>
+      <td>24</td>
+      <td>4780.0</td>
+      <td>658</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-25</td>
+      <td>2.0</td>
+      <td>34.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cu2308P61000</td>
+      <td>沪铜23年08月沽61000</td>
+      <td>7862.0</td>
+      <td>6834.0</td>
+      <td>664.79%</td>
+      <td>0</td>
+      <td>39310.0</td>
+      <td>8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-1</td>
+      <td>1028.0</td>
+      <td>7862.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>cu2304P54000</td>
+      <td>沪铜23年04月沽54000</td>
+      <td>44.0</td>
+      <td>38.0</td>
+      <td>633.33%</td>
+      <td>0</td>
+      <td>880.0</td>
+      <td>161</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>6.0</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>cu2303P50000</td>
+      <td>沪铜23年03月沽50000</td>
+      <td>14.0</td>
+      <td>12.0</td>
+      <td>600.0%</td>
+      <td>0</td>
+      <td>210.0</td>
+      <td>267</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-3</td>
+      <td>2.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>395</th>
+      <td>cu2307P54000</td>
+      <td>沪铜23年07月沽54000</td>
+      <td>180.0</td>
+      <td>-576.0</td>
+      <td>-76.19%</td>
+      <td>3</td>
+      <td>8480.0</td>
+      <td>33</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>6</td>
+      <td>756.0</td>
+      <td>198.0</td>
+    </tr>
+    <tr>
+      <th>396</th>
+      <td>cu2302P70000</td>
+      <td>沪铜23年02月沽70000</td>
+      <td>348.0</td>
+      <td>-1238.0</td>
+      <td>-78.06%</td>
+      <td>1002</td>
+      <td>4714410.0</td>
+      <td>658</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>541</td>
+      <td>1586.0</td>
+      <td>1210.0</td>
+    </tr>
+    <tr>
+      <th>397</th>
+      <td>cu2302P67000</td>
+      <td>沪铜23年02月沽67000</td>
+      <td>2.0</td>
+      <td>-38.0</td>
+      <td>-95.0%</td>
+      <td>1242</td>
+      <td>76250.0</td>
+      <td>1226</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-1292</td>
+      <td>40.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>398</th>
+      <td>cu2302P69000</td>
+      <td>沪铜23年02月沽69000</td>
+      <td>16.0</td>
+      <td>-742.0</td>
+      <td>-97.89%</td>
+      <td>4670</td>
+      <td>8800660.0</td>
+      <td>2411</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2161</td>
+      <td>758.0</td>
+      <td>460.0</td>
+    </tr>
+    <tr>
+      <th>399</th>
+      <td>cu2302P68000</td>
+      <td>沪铜23年02月沽68000</td>
+      <td>2.0</td>
+      <td>-234.0</td>
+      <td>-99.15%</td>
+      <td>3413</td>
+      <td>1267520.0</td>
+      <td>2173</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-257</td>
+      <td>236.0</td>
+      <td>62.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>400 rows × 13 columns</p>
+</div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Option-information">
+<h2>Option information<a class="headerlink" href="#Option-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="支持的交易所名称以及字母简写">
+<h3>支持的交易所名称以及字母简写<a class="headerlink" href="#支持的交易所名称以及字母简写" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_exchange_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>交易市场名称</th>
+      <th>交易市场</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>sse</td>
+      <td>上交所</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>szse</td>
+      <td>深交所</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cffex</td>
+      <td>中金所</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ine</td>
+      <td>上期能源</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+<div class="section" id="支持的期权品种">
+<h2>支持的期权品种<a class="headerlink" href="#支持的期权品种" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_option_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>标的代码</th>
+      <th>期权名称</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>510050</td>
+      <td>上证50ETF期权</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>510300</td>
+      <td>沪深300ETF期权</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>510500</td>
+      <td>中证500ETF期权</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>159919</td>
+      <td>沪深300ETF期权</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>159922</td>
+      <td>中证500ETF期权</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>159915</td>
+      <td>创业板ETF期权</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>000300</td>
+      <td>沪深300股指期权</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>000852</td>
+      <td>中证1000股指期权</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>000016</td>
+      <td>上证50股指期权</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>cu</td>
+      <td>铜期权</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>al</td>
+      <td>铝期权</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>zn</td>
+      <td>锌期权</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>rb</td>
+      <td>螺纹钢期权</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>au</td>
+      <td>黄金期权</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>ag</td>
+      <td>白银期权</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>ru</td>
+      <td>天胶期权</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>m</td>
+      <td>豆粕期权</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>c</td>
+      <td>玉米期权</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>i</td>
+      <td>铁矿石期权</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>pg</td>
+      <td>液化石油天然气期权</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>l</td>
+      <td>聚乙烯期权</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>v</td>
+      <td>聚氯乙烯期权</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>pp</td>
+      <td>聚丙烯期权</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>p</td>
+      <td>棕榈油期权</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>a</td>
+      <td>黄大豆1号期权</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>b</td>
+      <td>黄大豆2号期权</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>y</td>
+      <td>豆油期权</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>SR</td>
+      <td>白糖期权</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>CF</td>
+      <td>棉花期权</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>TA</td>
+      <td>PTA期权</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>MA</td>
+      <td>甲醇期权</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>RM</td>
+      <td>菜籽粕期权</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>OI</td>
+      <td>菜籽油期权</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>PK</td>
+      <td>花生期权</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>sc</td>
+      <td>原油期权</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="根据交易所名称，返回相应的期权信息">
+<h2>根据交易所名称，返回相应的期权信息<a class="headerlink" href="#根据交易所名称，返回相应的期权信息" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_meta_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>标的代码</th>
+      <th>期权名称</th>
+      <th>交易市场名称</th>
+      <th>交易市场</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>510050</td>
+      <td>上证50ETF期权</td>
+      <td>sse</td>
+      <td>上交所</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>510300</td>
+      <td>沪深300ETF期权</td>
+      <td>sse</td>
+      <td>上交所</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>510500</td>
+      <td>中证500ETF期权</td>
+      <td>sse</td>
+      <td>上交所</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>159919</td>
+      <td>沪深300ETF期权</td>
+      <td>szse</td>
+      <td>深交所</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>159922</td>
+      <td>中证500ETF期权</td>
+      <td>szse</td>
+      <td>深交所</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>159915</td>
+      <td>创业板ETF期权</td>
+      <td>szse</td>
+      <td>深交所</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>000300</td>
+      <td>沪深300股指期权</td>
+      <td>cffex</td>
+      <td>中金所</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>000852</td>
+      <td>中证1000股指期权</td>
+      <td>cffex</td>
+      <td>中金所</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>000016</td>
+      <td>上证50股指期权</td>
+      <td>cffex</td>
+      <td>中金所</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>cu</td>
+      <td>铜期权</td>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>al</td>
+      <td>铝期权</td>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>zn</td>
+      <td>锌期权</td>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>rb</td>
+      <td>螺纹钢期权</td>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>au</td>
+      <td>黄金期权</td>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>ag</td>
+      <td>白银期权</td>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>ru</td>
+      <td>天胶期权</td>
+      <td>shfe</td>
+      <td>上期所</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>m</td>
+      <td>豆粕期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>c</td>
+      <td>玉米期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>i</td>
+      <td>铁矿石期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>pg</td>
+      <td>液化石油天然气期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>l</td>
+      <td>聚乙烯期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>v</td>
+      <td>聚氯乙烯期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>pp</td>
+      <td>聚丙烯期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>p</td>
+      <td>棕榈油期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>a</td>
+      <td>黄大豆1号期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>b</td>
+      <td>黄大豆2号期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>y</td>
+      <td>豆油期权</td>
+      <td>dce</td>
+      <td>大商所</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>SR</td>
+      <td>白糖期权</td>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>CF</td>
+      <td>棉花期权</td>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>TA</td>
+      <td>PTA期权</td>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>MA</td>
+      <td>甲醇期权</td>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>RM</td>
+      <td>菜籽粕期权</td>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>OI</td>
+      <td>菜籽油期权</td>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>PK</td>
+      <td>花生期权</td>
+      <td>czce</td>
+      <td>郑商所</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>sc</td>
+      <td>原油期权</td>
+      <td>ine</td>
+      <td>上期能源</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>根据交易所名称，返回相应的期权信息<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_meta_data</span><span class="p">(</span><span class="n">exchange_name</span> <span class="o">=</span> <span class="s1">&#39;cffex&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>标的代码</th>
+      <th>期权名称</th>
+      <th>交易市场名称</th>
+      <th>交易市场</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>000300</td>
+      <td>沪深300股指期权</td>
+      <td>cffex</td>
+      <td>中金所</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>000852</td>
+      <td>中证1000股指期权</td>
+      <td>cffex</td>
+      <td>中金所</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>000016</td>
+      <td>上证50股指期权</td>
+      <td>cffex</td>
+      <td>中金所</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="get_yield_example.html" class="btn btn-neutral float-right" title="收益率相关数据" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="get_index_example.html" class="btn btn-neutral float-left" title="指数相关数据" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Yu Lu.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
