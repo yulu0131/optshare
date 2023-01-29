@@ -6,7 +6,7 @@ Special thanks to [AKshare](https://github.com/akfamily/akshare) for the opportu
 
 The main source of [OPTshare](https://github.com/yulu0131/optshare) data is the official website and raw data published by eastmoney financial website.
 
-- Documentation: [文档链接](https://optshare.readthedocs.io/en/latest/index.html#) 
+- Documentation: [文档链接](https://optshare.readthedocs.io/en/latest/) 
 
 ## Installation
 
