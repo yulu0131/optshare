@@ -1,15 +1,15 @@
-optshare.option
+Option
 =======================
 
-optshare.option.option\_data
+Option Data
 -----------------------------------
 
 .. automodule:: optshare.option.option_data
-   :members:
+   :members: get_current_option
    :undoc-members:
    :show-inheritance:
 
-optshare.option.option\_info
+Option Information
 -----------------------------------
 
 .. automodule:: optshare.option.option_info

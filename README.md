@@ -1,11 +1,17 @@
-# optshare
+# OPTshare
 
-This repository aims to provide easy-to-use option data, index data and market yield data, including common bond yield, shibor, lpr.
+Special thanks to [AKshare](https://github.com/akfamily/akshare) for the opportunity to learn from this project in terms of code and project development.
+
+[OPTshare](https://github.com/yulu0131/optshare) is a Python-based option data interface library, designed to provide easy-to-use option data, index data, and market yield data.
+
+The main source of [OPTshare](https://github.com/yulu0131/optshare) data is the official website and raw data published by eastmoney financial website.
+
+- Documentation: [文档链接](https://optshare.readthedocs.io/en/latest/index.html#) 
 
 ## Installation
 
 ```
-pip install optshare
+pip install optshare --upgrade
 ```
 
 ## Usage

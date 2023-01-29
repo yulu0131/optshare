@@ -1,8 +1,5 @@
-optshare.index
+Index Data
 ======================
-
-optshare.index.index\_data
----------------------------------
 
 .. automodule:: optshare.index.index_data
    :members:

@@ -2,7 +2,7 @@ import requests
 import json
 import pandas as pd
 
-def get_shibor(start_date: str = '20220201', end_date: str = '20230101') -> pd.DataFrame:
+def get_shibor(start_date: str = '20220201', end_date: str = '20230101'):
     """ target website: https://www.shibor.org/shibor/
     Warning: end_date - start date < one year
 
@@ -60,7 +60,7 @@ def get_shibor(start_date: str = '20220201', end_date: str = '20230101') -> pd.D
         raise Exception("Data only provided for one year or less!")
 
 
-def get_lpr(start_date: str = '20220201', end_date: str = '20230101') -> pd.DataFrame:
+def get_lpr(start_date: str = '20220201', end_date: str = '20230101'):
     """ target website: https://www.shibor.org/shibor/
     Warning: end_date - start date < one year
 

@@ -79,4 +79,5 @@ intersphinx_mapping = {
     'numpy': ('https://docs.scipy.org/doc/numpy/', None)
 }
 
-
+# drop module name
+add_module_names = False

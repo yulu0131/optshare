@@ -202,7 +202,7 @@ def get_commodity_option(exchange_name=None, underlying_symbol=None) -> pd.DataF
     return option_df
 
 
-def get_current_option(underlying_code=None, exchange_name=None) -> pd.DataFrame:
+def get_current_option(underlying_code=None, exchange_name=None):
     """ 东方财富网-行情中心-期权市场 https://quote.eastmoney.com/center
 
     Parameters

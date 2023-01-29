@@ -14,3 +14,4 @@ dist
 # py caches
 __pycache__
 Footer
+build

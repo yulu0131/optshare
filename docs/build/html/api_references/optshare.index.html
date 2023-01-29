@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>optshare.index &mdash; optshare 0.1.1 documentation</title>
+  <title>Index Data &mdash; optshare 0.1.2 documentation</title>
   
 
   
@@ -41,7 +41,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Market Yield Data" href="optshare.market_yield.html" />
+    <link rel="prev" title="optshare" href="optshare.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,9 +88,18 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">Api</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">使用示例</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">代码API references</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="optshare.html">optshare</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Index Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optshare.market_yield.html">Market Yield Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optshare.option.html">Option</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             
@@ -137,7 +148,11 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>optshare.index</li>
+          <li><a href="../api.html">Api</a> &raquo;</li>
+        
+          <li><a href="optshare.html">optshare</a> &raquo;</li>
+        
+      <li>Index Data</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -180,13 +195,11 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="optshare-index">
-<h1>optshare.index<a class="headerlink" href="#optshare-index" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-optshare.index.index_data">
-<span id="optshare-index-index-data"></span><h2>optshare.index.index_data<a class="headerlink" href="#module-optshare.index.index_data" title="Permalink to this headline">¶</a></h2>
+<span id="index-data"></span><h1>Index Data<a class="headerlink" href="#module-optshare.index.index_data" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="optshare.index.index_data.get_current_index">
-<span class="sig-prename descclassname"><span class="pre">optshare.index.index_data.</span></span><span class="sig-name descname"><span class="pre">get_current_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#optshare.index.index_data.get_current_index" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_current_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optshare.index.index_data.get_current_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>target website: <a class="reference external" href="https://quote.eastmoney.com/center/hszs.html">https://quote.eastmoney.com/center/hszs.html</a> 支持上证指数、深证系列指数、指数成分、以及中证系列指数</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -203,18 +216,18 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="optshare.index.index_data.get_daily_index">
-<span class="sig-prename descclassname"><span class="pre">optshare.index.index_data.</span></span><span class="sig-name descname"><span class="pre">get_daily_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#optshare.index.index_data.get_daily_index" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_daily_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optshare.index.index_data.get_daily_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>东方财富网-中国股票指数-行情数据 <a class="reference external" href="https://quote.eastmoney.com/concept/sh603777.html?from=classic">https://quote.eastmoney.com/concept/sh603777.html?from=classic</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>index_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – 指数代码</p></li>
-<li><p><strong>start_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – 开始日期</p></li>
-<li><p><strong>end_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – 结束日期</p></li>
+<li><p><strong>index_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – index symbol</p></li>
+<li><p><strong>start_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>'yyyymmdd'</em>) – start date</p></li>
+<li><p><strong>end_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>'yyyymmdd'</em>) – end date</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>行情数据</p>
+<dd class="field-even"><p>historical daily index data</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
@@ -223,13 +236,16 @@
 </dd></dl>
 
 </div>
-</div>
 
 
            </div>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="optshare.market_yield.html" class="btn btn-neutral float-right" title="Market Yield Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="optshare.html" class="btn btn-neutral float-left" title="optshare" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

@@ -3,7 +3,7 @@ import os
 
 option_info = pd.read_csv(os.path.join(os.path.dirname(__file__), "option_info.csv"))
 
-def get_exchange_info() -> pd.DataFrame:
+def get_exchange_info():
     """Exchange Information
 
     Returns
@@ -20,7 +20,7 @@ def get_exchange_info() -> pd.DataFrame:
     return exchange_info
 
 
-def get_option_info() -> pd.DataFrame:
+def get_option_info():
     """Option Information
 
     Returns
@@ -36,7 +36,7 @@ def get_option_info() -> pd.DataFrame:
     return option_info_df
 
 
-def get_meta_data(exchange_name=None) -> pd.DataFrame:
+def get_meta_data(exchange_name=None):
     """
     Parameters
     ----------

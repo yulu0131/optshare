@@ -3,7 +3,7 @@ import requests
 
 def get_bond_yield(
     start_date: str = "20200204", end_date: str = "20210124"
-) -> pd.DataFrame:
+) :
     """ 中国债券信息网-国债及其他债券收益率曲线
     Warning: end_date - start date < one year
 

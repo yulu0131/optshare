@@ -4,13 +4,25 @@
    contain the root `toctree` directive.
 
 
-Contents
-===============
+OPTshare
+=================================
 
+.. note::
+
+   Please visit `OPTshare's Github`_ for source code or visit `Github Issues`_ if you have any question!
+
+.. _OPTshare's Github: https://github.com/yulu0131/optshare
+
+.. _Github Issues: https://github.com/yulu0131/optshare/issues
+
+Table of Contents
+=================================
 .. toctree::
+   :maxdepth: 1
 
-   usage
-   api
+   项目介绍 <introduction>
+   使用示例 <usage>
+   代码API references <api>
 
 Indices and tables
 ==================

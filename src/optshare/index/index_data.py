@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import json
 
-def get_current_index(index_symbol = None) -> pd.DataFrame:
+def get_current_index(index_symbol = None):
     """ target website: https://quote.eastmoney.com/center/hszs.html 支持上证指数、深证系列指数、指数成分、以及中证系列指数
 
     :param index_symbol: index symbol or None
@@ -62,16 +62,16 @@ def get_current_index(index_symbol = None) -> pd.DataFrame:
     else:
         return index_df[index_df['代码'] == index_symbol]
 
-def get_daily_index(index_symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
+def get_daily_index(index_symbol: str, start_date: str, end_date: str):
     """ 东方财富网-中国股票指数-行情数据 https://quote.eastmoney.com/concept/sh603777.html?from=classic
 
-    :param index_symbol: 指数代码
+    :param index_symbol: index symbol
     :type index_symbol: str
-    :param start_date: 开始日期
-    :type start_date: str
-    :param end_date: 结束日期
-    :type end_date: str
-    :returns: 行情数据
+    :param start_date: start date
+    :type start_date: str, 'yyyymmdd'
+    :param end_date: end date
+    :type end_date: str, 'yyyymmdd'
+    :returns: historical daily index data
     :rtype: pandas.DataFrame
     """
 

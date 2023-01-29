@@ -1,7 +1,7 @@
-optshare.market\_yield
+Market Yield Data
 ==============================
 
-optshare.market\_yield.bond\_yield
+Bond Yield Data
 -----------------------------------------
 
 .. automodule:: optshare.market_yield.bond_yield
@@ -9,7 +9,7 @@ optshare.market\_yield.bond\_yield
    :undoc-members:
    :show-inheritance:
 
-optshare.market\_yield.shibor
+Shibor and Lpr Data
 ------------------------------------
 
 .. automodule:: optshare.market_yield.shibor
