@@ -21,7 +21,7 @@ def get_current_index(index_symbol = None):
         'fltt': '2',
         'invt': '2',
         'fid': 'f3',
-        'fs': 'm:1+s:2,m:0+t:5,m:2',
+        'fs': 'b:MK0010,m:1+s:2,m:0+t:5,m:2',
         'fields': 'f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f12,f13,f14,f15,f16,f17,f18,f20,f21,f23,f24,f25,f26,f22,f33,f11,f62,f128,f136,f115,f152',
         '_': '1673331486214'
     }
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     # test get current index
     whole_index_df = get_current_index()
     print(whole_index_df)
-    test_df = get_current_index('000300')
+    test_df = get_current_index('000852')
     print(test_df)
-    daily_df = get_daily_index(index_symbol='000300', start_date='19900101', end_date='20201230')
+    daily_df = get_daily_index(index_symbol='000852', start_date='19900101', end_date='20201230')
     print(daily_df)
