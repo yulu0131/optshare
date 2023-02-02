@@ -23,7 +23,7 @@ copyright = '2023, Yu Lu'
 author = 'Yu Lu'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.4'
+release = '0.1.51'
 
 
 # -- General configuration ---------------------------------------------------

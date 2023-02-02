@@ -3,13 +3,13 @@ import requests
 import pandas as pd
 
 
-def get_ccfex_option(underlying_symbol=None) -> pd.DataFrame:
+def get_ccfex_option(underlying_symbol=None):
     """ 东方财富网-行情中心-期权市场 https://quote.eastmoney.com/center
 
     Parameters
     ----------
     underlying_symbol : str or None
-        ccfex underlying symbol, e.g. '000300', '000852', '000016'
+        ccfex index symbol, e.g. '000300', '000852', '000016'
 
     Returns
     -----------
@@ -81,7 +81,7 @@ def get_ccfex_option(underlying_symbol=None) -> pd.DataFrame:
     return ccfex_df
 
 
-def commodity_option_variety(exchange_name) -> dict:
+def commodity_option_variety(exchange_name):
     """
     Parameters
     ----------
@@ -109,7 +109,7 @@ def commodity_option_variety(exchange_name) -> dict:
     return variety_dictionary
 
 
-def get_commodity_option(exchange_name=None, underlying_symbol=None) -> pd.DataFrame:
+def get_commodity_option(exchange_name=None, underlying_symbol=None):
     """ 东方财富网-行情中心-期权市场 https://quote.eastmoney.com/center
 
     Parameters
@@ -117,7 +117,7 @@ def get_commodity_option(exchange_name=None, underlying_symbol=None) -> pd.DataF
     exchange_name : str or None
         exchange name, e.g. 'shfe', 'dce', 'czce', 'ine'
     underlying_symbol: str or None
-        underlying symbol
+        index symbol
 
     Returns
     -----------
@@ -208,14 +208,14 @@ def get_current_option(underlying_code=None, exchange_name=None):
     Parameters
     ----------
     underlying_code: str or None
-        option underlying code
+        option index code
     exchange_name: str or None
         exchange name, e.g. 'ccfex'
 
     Returns
     -----------
     pandas.DataFrame
-        option information given underlying code or exchange name, if neither of them are given, return all current trading options
+        option information given index code or exchange name, if neither of them are given, return all current trading options
     """
 
     url = 'https://66.push2.eastmoney.com/api/qt/clist/get'
@@ -256,15 +256,15 @@ def get_current_option(underlying_code=None, exchange_name=None):
     elif underlying_code is not None and exchange_name is None:
 
         # equity
-        # underlying code in sse
+        # index code in sse
         if underlying_code in ['510050', '510300', '510500']:
             params.update(fs='m:10+c:' + underlying_code)
 
-        # underlying code in szse
+        # index code in szse
         elif underlying_code in ['159919', '159922', '159915']:
             params.update(fs='m:12+c:' + underlying_code)
 
-        # underlying code in ccfex
+        # index code in ccfex
         elif underlying_code in ['000300', '000016', '000852']:
             return get_ccfex_option(underlying_code)
 
@@ -358,7 +358,7 @@ if __name__ == '__main__':
         test_df = get_current_option(exchange_name=exchange)
         print(test_df)
 
-    # return dataframe given each underlying symbol
+    # return dataframe given each index symbol
     sse_symbols = ['510050', '510300', '510500']
     szse_symbols = ['159919', '159922', '159915']
     ccfex_symbols = ['000300', '000016', '000852']

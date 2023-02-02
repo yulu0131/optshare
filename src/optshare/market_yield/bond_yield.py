@@ -1,23 +1,21 @@
 import pandas as pd
 import requests
 
-def get_bond_yield(
-    start_date: str = "20200204", end_date: str = "20210124"
-) :
+def get_bond_yield(start_date, end_date) :
     """ 中国债券信息网-国债及其他债券收益率曲线
-    Warning: end_date - start date < one year
+    Warning: end_date - start dateutils < one year
 
     Parameters
     ------------------
     start_date: str, 'yyyymmdd'
-        start date
+        start dateutils
     end_date: str, 'yyyymmdd'
-        end date
+        end dateutils
 
     Returns
     ------------------
     pandas.DataFrame
-        Bond yield data with term structure given start date and end date
+        Bond yield data with term structure given start dateutils and end dateutils
     """
 
     url = "https://yield.chinabond.com.cn/cbweb-pbc-web/pbc/historyQuery"

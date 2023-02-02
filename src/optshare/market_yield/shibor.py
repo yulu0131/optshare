@@ -2,21 +2,21 @@ import requests
 import json
 import pandas as pd
 
-def get_shibor(start_date: str = '20220201', end_date: str = '20230101'):
+def get_shibor(start_date, end_date):
     """ target website: https://www.shibor.org/shibor/
-    Warning: end_date - start date < one year
+    Warning: end_date - start dateutils < one year
 
     Parameters
     -----------------
     start_date: str, 'yyyymmdd'
-        start date
+        start dateutils
     end_date: str, 'yyyymmdd'
-        end date
+        end dateutils
 
     Returns
     -----------------
     pandas.DataFrame
-        shibor market_yield data with term structure given start date and end date
+        shibor market_yield data with term structure given start dateutils and end dateutils
     """
     try:
         url = "https://www.shibor.org/ags/ms/cm-u-bk-shibor/ShiborHis"
@@ -60,21 +60,21 @@ def get_shibor(start_date: str = '20220201', end_date: str = '20230101'):
         raise Exception("Data only provided for one year or less!")
 
 
-def get_lpr(start_date: str = '20220201', end_date: str = '20230101'):
+def get_lpr(start_date, end_date):
     """ target website: https://www.shibor.org/shibor/
-    Warning: end_date - start date < one year
+    Warning: end_date - start dateutils < one year
 
     Parameters
     ------------------
     start_date: str, 'yyyymmdd'
-        start date
+        start dateutils
     end_date: str, 'yyyymmdd'
-        end date
+        end dateutils
 
     Returns
     ------------------
     pandas.DataFrame
-        LPR market_yield data with term structure given start date and end date
+        LPR market_yield data with term structure given start dateutils and end dateutils
     """
     try:
         url = "https://www.shibor.org/ags/ms/cm-u-bk-currency/LprHis"
