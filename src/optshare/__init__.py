@@ -12,10 +12,11 @@ if missing_dependencies:
     )
 
 
-__version__ = "0.1.51"
+__version__ = "0.1.54"
 
 del dependencies, dependency, missing_dependencies
 
 from optshare.option import *
 from optshare.index import *
 from optshare.market_yield import *
+from optshare.dateutils import *

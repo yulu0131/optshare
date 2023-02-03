@@ -8,22 +8,29 @@ class Calendar:
 
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename=None):
         """ Specify holiday list with a txt file
 
-        :param filename: a txt file with holiday list, use remote url instead if cannot find file
-        :type filename: str
+        :param filename: a txt file with holiday list, use remote url instead if cannot find file or filename is None
+        :type filename: str or None
         """
         self.filename = filename
-        self.data_path = os.path.join(os.path.dirname(__file__), filename)
+
         try:
-            with open(self.data_path, 'r') as f:
-                holiday_dates = f.readlines()
+            if self.filename is None:
+                response = requests.get(
+                    'https://raw.githubusercontent.com/yulu0131/optshare/master/src/optshare/dateutils/China.txt')
+                holiday_dates = list(filter(None, response.text.split('\n')))
+
+            else:
+                data_path = os.path.join(os.path.dirname(__file__), self.filename)
+                with open(data_path, 'r') as f:
+                    holiday_dates = f.readlines()
 
         except FileNotFoundError:
             warnings.warn("Cannot recognize filename, use remote Chinese holiday list instead")
             response = requests.get(
-                'https://raw.githubusercontent.com/yulu0131/optshare/master/src/optshare/date/China.txt')
+                'https://raw.githubusercontent.com/yulu0131/optshare/master/src/optshare/dateutils/China.txt')
             holiday_dates = list(filter(None, response.text.split('\n')))
 
         self._holiday_rule = [datetime.strptime(holiday_date.rstrip('\n'), "%Y-%m-%d").date() for holiday_date in
@@ -111,7 +118,7 @@ class Calendar:
 
 if __name__ == '__main__':
     # test datafile
-    cal = Calendar("China.txt")
+    cal = Calendar()
     from datetime import date
 
     date1 = date(2023, 10, 1)
