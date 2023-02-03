@@ -1,9 +1,10 @@
-import datetime
-from datetime import date, datetime, timedelta
-
 """ This module provides you with useful date utility functions in the Chinese financial market for more convenient research purpose.
 
 """
+
+import datetime
+from datetime import date, datetime, timedelta
+
 
 def get_market_time(now):
     """ Adjusted current datetime function.
@@ -168,7 +169,7 @@ def get_nth_trading_day(n, yyyy, mm, cal):
 
 if __name__ == "__main__":
 
-    from calendar_func import Calendar
+    from calendar_def import Calendar
     chinese_cal = Calendar("China.txt")
     date1 = date(2023, 10, 1)
     date2 = date(2023, 11, 1)

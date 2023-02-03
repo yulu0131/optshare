@@ -1,13 +1,10 @@
-import optshare as opt
-from datetime import datetime
-import pandas as pd
 
 """ Current Financial Option T-type Quotation
 
 For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
 
 The format of T-type quotation data:
-- date, strike, latest price of call option, latest price of put option, underlying code, latest price of underlying, expiry date
+- date, strike, the latest price of call option, latest price of put option, underlying code, latest price of underlying, expiry date
 """
 
 
