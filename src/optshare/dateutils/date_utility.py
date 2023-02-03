@@ -64,6 +64,19 @@ def date_from_string(date_str):
 
 
 def count_natural_days(start_date_str, end_date_str, include_start_date=False, include_end_date=True):
+    """ Count the number of the natural days given string-like start date and date, with the inclusion of start date and end date represented by the specified boolean respectively
+
+    :param start_date_str: start date string
+    :type start_date_str: str, 'yyyymmdd'
+    :param end_date_str: end date string
+    :type end_date_str: str, 'yyyymmdd'
+    :param include_start_date: determine whether to include the start date
+    :type include_end_date: bool
+    :param include_end_date: determine whether to include the end date
+    :type include_end_date: bool
+    :return: the number of natural days between start date and end date
+    :rtype: int
+    """
 
     start_date = date_from_string(start_date_str)
     end_date = date_from_string(end_date_str)
@@ -76,38 +89,79 @@ def count_natural_days(start_date_str, end_date_str, include_start_date=False, i
     return end_date - start_date - 1 + days_to_add
 
 def count_business_days(start_date_str, end_date_str, cal, include_start_date=False, include_end_date=True):
+    """ Count the number of business days given string-like start date and date, with the inclusion of start date and end date represented by the specified boolean respectively
+
+    :param start_date_str: start date string
+    :type start_date_str: str, 'yyyymmdd'
+    :param end_date_str: end date string
+    :type end_date_str: str, 'yyyymmdd'
+    :param cal: calendar
+    :type cal: optshare.Calendar
+    :param include_start_date: determine whether to include the start date
+    :type include_end_date: bool
+    :param include_end_date: determine whether to include the end date
+    :type include_end_date: bool
+    :return: the number of natural days between start date and end date
+    :rtype: int
+    """
+
     start_date = date_from_string(start_date_str)
     end_date = date_from_string(end_date_str)
     return cal.business_days_between(start_date, end_date, include_start_date, include_end_date)
 
 def get_lastnth_trading_day(n, yyyy, mm, cal):
+    """ Return the last nth trading day in month
+
+    :param n: nth trading day
+    :type n: int
+    :param yyyy: 4-digit year number
+    :type yyyy: int
+    :param mm: month number, 1-12
+    :type mm: int
+    :param cal: calendar object
+    :type cal: optshare.Calendar
+    :return: the last nth trading day in month
+    :rtype: datetime.date
+    """
     def add_months(input_date, months):
         month = input_date.month - 1 + months
         year = input_date.year + month // 12
         month = month % 12 + 1
         import calendar
         day = min(input_date.day, calendar.monthrange(year, month)[1])
-        return datetime.date(year, month, day)
+        return date(year, month, day)
 
-    first_date = date(yyyy, mm, 1)
-    next_month_first_date = first_date + add_months(first_date, 1)
+    next_month_first_date = add_months(date(yyyy, mm, 1), 1)
     d = next_month_first_date - timedelta(days=1)
     i = 0
-    if cal.is_businessday(d):
+    if cal.is_business_day(d):
         i += 1
     while i < n:
-        d = cal.previous_businessday(d)
+        d = cal.previous_business_day(d)
         i += 1
     return d
 
 
 def get_nth_trading_day(n, yyyy, mm, cal):
+    """ Return the nth trading day in month
+
+    :param n: nth trading day
+    :type n: int
+    :param yyyy: 4-digit year number
+    :type yyyy: int
+    :param mm: month number, 1-12
+    :type mm: int
+    :param cal: calendar object
+    :type cal: optshare.Calendar
+    :return: the nth trading day in month
+    :rtype: datetime.date
+    """
     d = date(yyyy, mm, 1)
     i = 0
-    if cal.is_businessday(d):
+    if cal.is_business_day(d):
         i += 1
     while i < n:
-        d = cal.next_businessday(d)
+        d = cal.next_business_day(d)
         i += 1
     return d
 
@@ -115,9 +169,9 @@ def get_nth_trading_day(n, yyyy, mm, cal):
 if __name__ == "__main__":
 
     from calendar_func import Calendar
-    cal = Calendar("China.txt")
+    chinese_cal = Calendar("China.txt")
     date1 = date(2023, 10, 1)
     date2 = date(2023, 11, 1)
-    trading_days_between = count_business_days("20231001", "20231101", cal)
-
+    trading_days_between = count_business_days("20231001", "20231101", chinese_cal)
+    # d = get_lastnth_trading_day(5, 2022, 11, chinese_cal)
     print(trading_days_between)
