@@ -166,18 +166,20 @@ class CommodityOption:
 
         return pd.concat(dfs, ignore_index=True)
 
-def get_commodity_option_quotes(exchange_name, current_datetime=None, display=True):
+def get_commodity_option_quotes(exchange_name, calendar = optshare.Calendar(), current_datetime=None, display=True):
     """ Commodity option quotes
 
     :param exchange_name: exchange name
     :type exchange_name: str
+    :param calendar: define transaction calendar
+    :type calendar: optshare.Calendar object
     :param current_datetime: current datetime
     :type current_datetime: datetime.date or None
     :param display: Determine whether to display the variety of option quotes when fetching data
     :return: Supported commodity option t-quotes in given exchange name
     :rtype: pandas.DataFrame
     """
-    commodity_option = CommodityOption(exchange_name)
+    commodity_option = CommodityOption(exchange_name, calendar)
     return commodity_option.get_option_quotes(current_datetime = current_datetime, display = display)
 
 if __name__ == '__main__':
