@@ -20,3 +20,4 @@ from optshare.option import *
 from optshare.index import *
 from optshare.market_yield import *
 from optshare.dateutils import *
+from optshare.quote import *

@@ -9,3 +9,4 @@ Example
     example/get_index_example
     example/get_option_example
     example/get_yield_example
+    example/get_quote_example

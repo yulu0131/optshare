@@ -125,12 +125,11 @@ class CommodityOption:
 
         return pd.concat(dfs, ignore_index=True)
 
-def get_commodity_option_quotes(exchange_name):
+def get_commodity_option_quotes(exchange_name, current_datetime, display):
     commodity_option = CommodityOption(exchange_name)
-    return commodity_option.get_option_quotes()
+    return commodity_option.get_option_quotes(current_datetime = current_datetime, display = display)
 
 if __name__ == '__main__':
-    #todo: check csv later, make sure all option expiry dates right
     exchange_names = ['dce', 'shfe', 'czce', 'ine']
     for name in exchange_names:
         t_quotation = get_commodity_option_quotes(exchange_name=name)
