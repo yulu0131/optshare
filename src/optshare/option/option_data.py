@@ -3,18 +3,18 @@ import requests
 import pandas as pd
 
 
-def get_ccfex_option(underlying_symbol=None):
+def get_cffex_option(underlying_symbol=None):
     """ 东方财富网-行情中心-期权市场 https://quote.eastmoney.com/center
 
     Parameters
     ----------
     underlying_symbol : str or None
-        ccfex index symbol, e.g. '000300', '000852', '000016'
+        cffex index symbol, e.g. '000300', '000852', '000016'
 
     Returns
     -----------
     pandas.DataFrame
-        current ccfex option information
+        current cffex option information
     """
 
     url = 'https://futsseapi.eastmoney.com/list/option/221'
@@ -50,7 +50,7 @@ def get_ccfex_option(underlying_symbol=None):
     data_json = json.loads(data_text[data_text.find('{'):-1])
     temp_df = pd.DataFrame(data_json['list'])
 
-    ccfex_df = pd.DataFrame(columns=['代码',
+    cffex_df = pd.DataFrame(columns=['代码',
                                      '名称',
                                      '最新价',
                                      '涨跌额',
@@ -64,21 +64,21 @@ def get_ccfex_option(underlying_symbol=None):
                                      '昨结',
                                      '今开'])
 
-    ccfex_df['代码'] = temp_df['dm']
-    ccfex_df['名称'] = temp_df['name']
-    ccfex_df['最新价'] = pd.to_numeric(temp_df['p'], errors='coerce')
-    ccfex_df['涨跌额'] = pd.to_numeric(temp_df['zde'], errors='coerce')
-    ccfex_df['涨跌幅'] = pd.to_numeric(temp_df['zdf'], errors='coerce').astype(str) + str('%')
-    ccfex_df['成交量'] = pd.to_numeric(temp_df['np'], errors='coerce')
-    ccfex_df['成交额'] = pd.to_numeric(temp_df['cje'], errors='coerce')
-    ccfex_df['持仓量'] = pd.to_numeric(temp_df['ccl'], errors='coerce')
-    ccfex_df['行权价'] = pd.to_numeric(temp_df['xqj'], errors='coerce')
-    ccfex_df['剩余日'] = pd.to_numeric(temp_df['syr'], errors='coerce')
-    ccfex_df['日增'] = pd.to_numeric(temp_df['rz'], errors='coerce')
-    ccfex_df['昨结'] = pd.to_numeric(temp_df['zjsj'], errors='coerce')
-    ccfex_df['今开'] = pd.to_numeric(temp_df['o'], errors='coerce')
+    cffex_df['代码'] = temp_df['dm']
+    cffex_df['名称'] = temp_df['name']
+    cffex_df['最新价'] = pd.to_numeric(temp_df['p'], errors='coerce')
+    cffex_df['涨跌额'] = pd.to_numeric(temp_df['zde'], errors='coerce')
+    cffex_df['涨跌幅'] = pd.to_numeric(temp_df['zdf'], errors='coerce').astype(str) + str('%')
+    cffex_df['成交量'] = pd.to_numeric(temp_df['np'], errors='coerce')
+    cffex_df['成交额'] = pd.to_numeric(temp_df['cje'], errors='coerce')
+    cffex_df['持仓量'] = pd.to_numeric(temp_df['ccl'], errors='coerce')
+    cffex_df['行权价'] = pd.to_numeric(temp_df['xqj'], errors='coerce')
+    cffex_df['剩余日'] = pd.to_numeric(temp_df['syr'], errors='coerce')
+    cffex_df['日增'] = pd.to_numeric(temp_df['rz'], errors='coerce')
+    cffex_df['昨结'] = pd.to_numeric(temp_df['zjsj'], errors='coerce')
+    cffex_df['今开'] = pd.to_numeric(temp_df['o'], errors='coerce')
 
-    return ccfex_df
+    return cffex_df
 
 
 def commodity_option_variety(exchange_name):
@@ -210,7 +210,7 @@ def get_current_option(underlying_code=None, exchange_name=None):
     underlying_code: str or None
         option index code
     exchange_name: str or None
-        exchange name, e.g. 'ccfex'
+        exchange name, e.g. 'cffex'
 
     Returns
     -----------
@@ -238,8 +238,8 @@ def get_current_option(underlying_code=None, exchange_name=None):
         url = 'https://98.push2.eastmoney.com/api/qt/clist/get'
 
     elif underlying_code is None and exchange_name is not None:
-        if exchange_name == 'ccfex':
-            return get_ccfex_option()
+        if exchange_name == 'cffex':
+            return get_cffex_option()
 
         elif exchange_name == 'sse':
             params.update(fs='m:10')
@@ -264,9 +264,9 @@ def get_current_option(underlying_code=None, exchange_name=None):
         elif underlying_code in ['159919', '159922', '159915']:
             params.update(fs='m:12+c:' + underlying_code)
 
-        # index code in ccfex
+        # index code in cffex
         elif underlying_code in ['000300', '000016', '000852']:
-            return get_ccfex_option(underlying_code)
+            return get_cffex_option(underlying_code)
 
         else:
             try:
@@ -353,7 +353,7 @@ def get_current_option(underlying_code=None, exchange_name=None):
 
 if __name__ == '__main__':
     # return exchange dataframe
-    all_exchange_strs = ['sse', 'ccfex', 'szse', 'shfe', 'dce', 'czce', 'ine']
+    all_exchange_strs = ['sse', 'cffex', 'szse', 'shfe', 'dce', 'czce', 'ine']
     for exchange in all_exchange_strs:
         test_df = get_current_option(exchange_name=exchange)
         print(test_df)
@@ -361,12 +361,12 @@ if __name__ == '__main__':
     # return dataframe given each index symbol
     sse_symbols = ['510050', '510300', '510500']
     szse_symbols = ['159919', '159922', '159915']
-    ccfex_symbols = ['000300', '000016', '000852']
+    cffex_symbols = ['000300', '000016', '000852']
     shfe_symbols = ['cu', 'ru', 'au', 'al', 'zn', 'rb', 'ag']
     dce_symbols = ['m', 'c', 'i', 'pg', 'pp', 'v', 'l', 'p', 'a', 'b', 'y']
     czce_symbols = ['SR', 'CF', 'TA', 'MA', 'RM', 'OI', 'PK']
     ine_symbols = ['sc']
-    all_symbols = sse_symbols + szse_symbols + ccfex_symbols + shfe_symbols + dce_symbols + czce_symbols + ine_symbols
+    all_symbols = sse_symbols + szse_symbols + cffex_symbols + shfe_symbols + dce_symbols + czce_symbols + ine_symbols
     commodity_symbols = shfe_symbols + dce_symbols + czce_symbols + ine_symbols
     for symbol in all_symbols:
         test_df = get_current_option(underlying_code=symbol)

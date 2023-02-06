@@ -1,22 +1,39 @@
-""" Current Financial Option T-type Quotation
-
-For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
-
-The format of T-type quotation data:
-- date, strike, the latest price of call option, latest price of put option, underlying code, the latest price of underlying, expiry date
-"""
-
 import optshare
-from datetime import datetime, date
+from datetime import datetime
 import pandas as pd
 
+
 class FinancialOption:
-    def __init__(self, exchange_name):
+    """ Current Financial Option T-type Quotation
+
+    For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
+
+    The format of T-type quotation data:
+    - date, strike, the latest price of call option, latest price of put option, underlying code, the latest price of underlying, expiry date
+    """
+
+    def __init__(self, exchange_name, calendar=optshare.Calendar()):
+        """ Specify Exchange name, 'cffex', 'sse', or 'szse'
+
+        :param exchange_name: exchange name offering financial options
+        :type exchange_name: str
+        :param calendar: define transaction calendar
+        :type: optshare.Calendar object, default value: optshare.Calendar()
+        """
         self.exchange_name = exchange_name
-        self.calendar = optshare.Calendar()
+        self.calendar = calendar
         self.underlying_df = optshare.get_current_index()
 
     def get_expiry_date(self, option_underlying_contract, today):
+        """ Given option underlying contract and today's date, return the expiry date of the financial option
+
+        :param option_underlying_contract: option underlying contract name
+        :type option_underlying_contract：str
+        :param today: today's date
+        :type today: datetime.date
+        :return: expiry date string
+        :rtype: str
+        """
         if self.exchange_name == "cffex":
             year = int(option_underlying_contract[2:4]) + 2000
             month = int(option_underlying_contract[4:6])
@@ -48,15 +65,30 @@ class FinancialOption:
 
         return str(expiry_date)
 
-    def _parse_ccfex_contract(self, option_contract):
-        # designed for cffex only
+    def _parse_cffex_contract(self, option_contract):
+        """ Designed for cffex exchange contract only
+
+        :param option_contract: option contract name
+        :type option_contract: str
+        :return: underlying code, and the corresponding expiry date
+        :rtype: tuple[str, str]
+        """
         option_contract = option_contract.split('-')
         underlying_code = option_contract[0]
-        expiry_date = self.get_expiry_date(underlying_code, today = None)
+        expiry_date = self.get_expiry_date(underlying_code, today=None)
 
         return underlying_code, expiry_date
 
     def get_financial_option(self, underlying_asset_code, current_datetime=None):
+        """ Return option t quote given underlying asset code
+
+        :param underlying_asset_code: underlyng asset code of the financial option
+        :type underlying_asset_code: str
+        :param current_datetime: current datetime
+        :type current_datetime: datetime.date or None
+        :return: the t-quotes of the selected financial option variety
+        :rtype: pandas.DataFrame
+        """
         if current_datetime is None:
             current_datetime = optshare.get_market_time(datetime.now())
         else:
@@ -66,7 +98,8 @@ class FinancialOption:
 
         try:
             option_df = optshare.get_current_option(underlying_code=underlying_asset_code)
-            underlying_price = self.underlying_df[self.underlying_df["代码"] == underlying_asset_code]['最新价'].values[-1]
+            underlying_price = self.underlying_df[self.underlying_df["代码"] == underlying_asset_code]['最新价'].values[
+                -1]
         except:
             raise Exception("wrong underlying asset code")
 
@@ -89,12 +122,13 @@ class FinancialOption:
         option_contracts = call_df['代码'].values.astype(str)
 
         n = len(option_contracts)
-        underlying_asset_codes = [None] * n
+
         expiry_dates = [None] * n
 
         if self.exchange_name == 'cffex':
+            underlying_asset_code = [None] * n
             for i in range(n):
-                underlying_asset_codes[i], expiry_dates[i] = self._parse_ccfex_contract(
+                underlying_asset_code[i], expiry_dates[i] = self._parse_cffex_contract(
                     option_contracts[i])
         else:
             today = current_datetime.date()
@@ -108,7 +142,16 @@ class FinancialOption:
 
         return option_quote
 
-    def get_option_quotes(self, current_datetime=None, display = True):
+    def get_option_quotes(self, current_datetime=None, display=True):
+        """ Return all option t-quotes in given exchange name
+
+        :param current_datetime: current datetime
+        :type current_datetime: datetime.date or None
+        :param display: Determine whether to display the variety of option quotes when fetching data
+        :type display: bool, default True
+        :return: Supported financial option t-quotes in given exchange name
+        :rtype: pandas.DataFrame
+        """
         if current_datetime is None:
             current_datetime = optshare.get_market_time(datetime.now())
         else:
@@ -128,15 +171,27 @@ class FinancialOption:
 
         return pd.concat(dfs, ignore_index=True)
 
-def get_financial_option_quotes(exchange_name, current_datetime = None, display = True):
+
+def get_financial_option_quotes(exchange_name, current_datetime=None, display=True):
+    """ Financial option quotes
+
+    :param exchange_name: exchange name
+    :type exchange_name: str
+    :param current_datetime: current datetime
+    :type current_datetime: datetime.date or None
+    :param display: Determine whether to display the variety of option quotes when fetching data
+    :return: Supported financial option t-quotes in given exchange name
+    :rtype: pandas.DataFrame
+    """
     financial_option = FinancialOption(exchange_name)
-    return financial_option.get_option_quotes(current_datetime = current_datetime, display=display)
+    return financial_option.get_option_quotes(current_datetime=current_datetime, display=display)
+
 
 if __name__ == '__main__':
-    exchange_names=['sse', 'cffex', 'szse']
+    # exchange_names=['sse', 'cffex', 'szse']
+    exchange_names = ['cffex']
     for name in exchange_names:
-        f_quotes = get_financial_option_quotes(exchange_name = name)
+        f_quotes = get_financial_option_quotes(exchange_name=name)
         print(f_quotes)
         # f_quotes['挂钩标的代码'] = f_quotes['挂钩标的代码'].apply('="{}"'.format)
-        #
         # f_quotes.to_csv("test_" + name + ".csv")

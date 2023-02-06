@@ -1,20 +1,36 @@
-""" Current Commodity Option T-type Quotation
-
-For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
-
-The format of T-type quotation data:
-- date, strike, the latest price of call option, latest price of put option, underlying code, expiry date
-"""
 
 import optshare
 from datetime import datetime, date
 import pandas as pd
+
 class CommodityOption:
-    def __init__(self, exchange_name):
+    """ Current Commodity Option T-type Quotation
+
+    For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
+
+    The format of T-type quotation data:
+    - date, strike, the latest price of call option, latest price of put option, underlying code, expiry date
+    """
+
+    def __init__(self, exchange_name, calendar=optshare.Calendar()):
+        """ Specify Exchange name, 'dce', 'shfe', 'czce', or 'ine'
+
+        :param exchange_name: exchange name offering commodity options
+        :type exchange_name: str
+        :param calendar: define transaction calendar
+        :type: optshare.Calendar object, default value: optshare.Calendar()
+        """
         self.exchange_name = exchange_name
-        self.calendar = optshare.Calendar()
+        self.calendar = calendar
 
     def get_expiry_date(self, option_underlying_contract):
+        """ Given option underlying contract and today's date, return the expiry date of the commodity option
+
+        :param option_underlying_contract: option underlying contract name
+        :type option_underlying_contract：str
+        :return: expiry date string
+        :rtype: str
+        """
         if self.exchange_name == "dce":
             yymm = option_underlying_contract[-4:]
             year = int(yymm[0:2]) + 2000
@@ -55,7 +71,13 @@ class CommodityOption:
             raise Exception("Wrong Exchange Name!")
 
     def _parse_commodity_contract(self, option_contract):
+        """ Designed for parsing commodity contract
 
+        :param option_contract: option contract name
+        :type option_contract: str
+        :return: underlying code, the corresponding expiry date, and the option strike
+        :rtype: tuple[str, str, str]
+        """
         import re
         parsed_code = re.split('(\d+)', option_contract)
 
@@ -66,6 +88,15 @@ class CommodityOption:
         return underlying_code, expiry_date, option_strike
 
     def get_commodity_option(self, underlying_asset_code, current_datetime = None):
+        """ Return option t quote given underlying asset code
+
+        :param underlying_asset_code: underlyng asset code of the commodity option
+        :type underlying_asset_code: str
+        :param current_datetime: current datetime
+        :type current_datetime: datetime.date or None
+        :return: the t-quotes of the selected commodity option variety
+        :rtype: pandas.DataFrame
+        """
         if current_datetime is None:
             current_datetime = optshare.get_market_time(datetime.now())
         else:
@@ -109,6 +140,16 @@ class CommodityOption:
 
         return option_quote
     def get_option_quotes(self, current_datetime = None, display = True):
+        """ Return all option t-quotes in given exchange name
+
+        :param current_datetime: current datetime
+        :type current_datetime: datetime.date or None
+        :param display: Determine whether to display the variety of option quotes when fetching data
+        :type display: bool, default True
+        :return: Supported commodity option t-quotes in given exchange name
+        :rtype: pandas.DataFrame
+        """
+
         if current_datetime is None:
             current_datetime = optshare.get_market_time(datetime.now())
         else:
@@ -125,7 +166,17 @@ class CommodityOption:
 
         return pd.concat(dfs, ignore_index=True)
 
-def get_commodity_option_quotes(exchange_name, current_datetime, display):
+def get_commodity_option_quotes(exchange_name, current_datetime=None, display=True):
+    """ Commodity option quotes
+
+    :param exchange_name: exchange name
+    :type exchange_name: str
+    :param current_datetime: current datetime
+    :type current_datetime: datetime.date or None
+    :param display: Determine whether to display the variety of option quotes when fetching data
+    :return: Supported commodity option t-quotes in given exchange name
+    :rtype: pandas.DataFrame
+    """
     commodity_option = CommodityOption(exchange_name)
     return commodity_option.get_option_quotes(current_datetime = current_datetime, display = display)
 
@@ -133,7 +184,7 @@ if __name__ == '__main__':
     exchange_names = ['dce', 'shfe', 'czce', 'ine']
     for name in exchange_names:
         t_quotation = get_commodity_option_quotes(exchange_name=name)
-        t_quotation.to_csv("test_"+name+".csv")
+        print(t_quotation)
 
 
 

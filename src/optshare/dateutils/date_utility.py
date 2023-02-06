@@ -1,4 +1,5 @@
-""" This module provides you with useful date utility functions in the Chinese financial market for more convenient research purpose.
+
+""" This module offers useful date utility functions in the Chinese financial market for more convenient research purpose.
 
 """
 
