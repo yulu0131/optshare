@@ -1,16 +1,17 @@
+
+""" Current Financial Option T-type Quotation
+
+For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
+
+The format of T-type quotation data:
+- date, strike, the latest price of call option, latest price of put option, underlying code, the latest price of underlying, expiry date
+"""
+
 import optshare
 from datetime import datetime
 import pandas as pd
 
-
 class FinancialOption:
-    """ Current Financial Option T-type Quotation
-
-    For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
-
-    The format of T-type quotation data:
-    - date, strike, the latest price of call option, latest price of put option, underlying code, the latest price of underlying, expiry date
-    """
 
     def __init__(self, exchange_name, calendar=optshare.Calendar()):
         """ Specify Exchange name, 'cffex', 'sse', or 'szse'
@@ -28,7 +29,7 @@ class FinancialOption:
         """ Given option underlying contract and today's date, return the expiry date of the financial option
 
         :param option_underlying_contract: option underlying contract name
-        :type option_underlying_contract：str
+        :type option_underlying_contract: str
         :param today: today's date
         :type today: datetime.date
         :return: expiry date string

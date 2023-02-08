@@ -1,16 +1,17 @@
 
+""" Current Commodity Option T-type Quotation
+
+For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
+
+The format of T-type quotation data:
+- date, strike, the latest price of call option, the latest price of put option, underlying code, expiry date
+"""
+
 import optshare
 from datetime import datetime, date
 import pandas as pd
 
 class CommodityOption:
-    """ Current Commodity Option T-type Quotation
-
-    For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
-
-    The format of T-type quotation data:
-    - date, strike, the latest price of call option, latest price of put option, underlying code, expiry date
-    """
 
     def __init__(self, exchange_name, calendar=optshare.Calendar()):
         """ Specify Exchange name, 'dce', 'shfe', 'czce', or 'ine'
@@ -27,7 +28,7 @@ class CommodityOption:
         """ Given option underlying contract and today's date, return the expiry date of the commodity option
 
         :param option_underlying_contract: option underlying contract name
-        :type option_underlying_contract：str
+        :type option_underlying_contract: str
         :return: expiry date string
         :rtype: str
         """
