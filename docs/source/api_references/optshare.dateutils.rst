@@ -12,6 +12,7 @@ Calendar Definition
 .. automodule:: optshare.dateutils.calendar_def
    :members:
    :undoc-members:
+   :special-members: __init__
    :show-inheritance:
 
 Date Utility Functions
