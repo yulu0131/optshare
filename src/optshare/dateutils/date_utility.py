@@ -36,7 +36,7 @@ def get_weekday_in_month(year, month, number_of_week, weekday):
     """ get the nth weekday in month
 
     :param year: year number, 'yyyy'
-    :type year：int
+    :type year: int
     :param month: month number, 1-12
     :type month: int
     :param number_of_week: number of the week
