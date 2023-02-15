@@ -15,3 +15,6 @@ dist
 __pycache__
 Footer
 build
+
+# sphinx build
+docs/build/

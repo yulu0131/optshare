@@ -21,6 +21,7 @@ Table of Contents
    :maxdepth: 1
 
    项目介绍 <introduction>
+   期权Wiki <wiki.rst>
    使用示例 <usage>
    代码API references <api>
 
