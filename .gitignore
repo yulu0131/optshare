@@ -17,4 +17,4 @@ Footer
 build
 
 # sphinx build
-docs/build/
+/docs/build/
