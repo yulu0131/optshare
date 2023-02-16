@@ -169,7 +169,7 @@ def get_financial_option_quotes(exchange_name, calendar = optshare.Calendar(), d
 
     :param exchange_name: exchange name
     :type exchange_name: str
-    :param calendar: define transaction calendar, default optshare.Calendar
+    :param calendar: define transaction calendar, default value is optshare.Calendar()
     :type calendar: optshare.Calendar object
     :param display: Determine whether to display the variety of option quotes when fetching data
     :return: Supported financial option t-quotes in given exchange name
