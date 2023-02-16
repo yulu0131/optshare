@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>收益率相关数据 &mdash; optshare 0.1.61 documentation</title>
+  <title>收益率相关数据 &mdash; optshare 0.1.62 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> optshare
+            <a href="../introduction.html" class="icon icon-home"> optshare
           
 
           
@@ -91,9 +91,9 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wiki.html">期权Wiki</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">使用示例</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="get_index_example.html">指数相关数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_index_example.html">指数以及ETF相关数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_option_example.html">期权示例</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">收益率相关数据</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#国债及其他债券收益率曲线">国债及其他债券收益率曲线</a></li>
@@ -121,7 +121,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">optshare</a>
+          <a href="../introduction.html">optshare</a>
         
       </nav>
 
@@ -152,7 +152,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../introduction.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../usage.html">Example</a> &raquo;</li>
         
@@ -456,7 +456,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="收益率相关数据">
 <h1>收益率相关数据<a class="headerlink" href="#收益率相关数据" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optshare</span>
@@ -466,7 +466,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="国债及其他债券收益率曲线">
 <h2>国债及其他债券收益率曲线<a class="headerlink" href="#国债及其他债券收益率曲线" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_bond_yield</span><span class="p">(</span><span class="n">start_date</span> <span class="o">=</span> <span class="s1">&#39;20200204&#39;</span><span class="p">,</span> <span class="n">end_date</span> <span class="o">=</span> <span class="s1">&#39;20210204&#39;</span><span class="p">)</span>
@@ -474,7 +474,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -661,7 +661,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Shibor-Data">
 <h2>Shibor Data<a class="headerlink" href="#Shibor-Data" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_shibor</span><span class="p">(</span><span class="n">start_date</span> <span class="o">=</span> <span class="s1">&#39;20211101&#39;</span><span class="p">,</span> <span class="n">end_date</span> <span class="o">=</span> <span class="s1">&#39;20220601&#39;</span><span class="p">)</span>
@@ -669,7 +669,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -844,7 +844,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Lpr-data">
 <h2>Lpr data<a class="headerlink" href="#Lpr-data" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">optshare</span><span class="o">.</span><span class="n">get_lpr</span><span class="p">(</span><span class="n">start_date</span> <span class="o">=</span> <span class="s1">&#39;20211101&#39;</span><span class="p">,</span> <span class="n">end_date</span> <span class="o">=</span> <span class="s1">&#39;20220601&#39;</span><span class="p">)</span>
@@ -852,7 +852,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">

@@ -80,20 +80,17 @@ class FinancialOption:
 
         return underlying_code, expiry_date
 
-    def get_financial_option(self, underlying_asset_code, current_datetime=None):
+    def get_financial_option(self, underlying_asset_code):
         """ Return option t quote given underlying asset code
 
         :param underlying_asset_code: underlyng asset code of the financial option
         :type underlying_asset_code: str
-        :param current_datetime: current datetime
-        :type current_datetime: datetime.date or None
+
         :return: the t-quotes of the selected financial option variety
         :rtype: pandas.DataFrame
         """
-        if current_datetime is None:
-            current_datetime = optshare.get_market_time(datetime.now())
-        else:
-            current_datetime = optshare.get_market_time(current_datetime)
+
+        current_datetime = optshare.get_market_time(datetime.now())
 
         current_datetime_str = current_datetime.strftime('%Y-%m-%d %H:%M')
 
@@ -143,20 +140,14 @@ class FinancialOption:
 
         return option_quote
 
-    def get_option_quotes(self, current_datetime=None, display=True):
+    def get_option_quotes(self, display=True):
         """ Return all option t-quotes in given exchange name
 
-        :param current_datetime: current datetime
-        :type current_datetime: datetime.date or None
         :param display: Determine whether to display the variety of option quotes when fetching data
         :type display: bool, default True
         :return: Supported financial option t-quotes in given exchange name
         :rtype: pandas.DataFrame
         """
-        if current_datetime is None:
-            current_datetime = optshare.get_market_time(datetime.now())
-        else:
-            current_datetime = optshare.get_market_time(current_datetime)
 
         underlying_codes = optshare.get_meta_data(exchange_name=self.exchange_name)['标的代码'].values.tolist()
 
@@ -166,28 +157,26 @@ class FinancialOption:
             if display:
                 print("fetch option quotes for ", underlying_code)
 
-            option_df = self.get_financial_option(underlying_code, current_datetime)
+            option_df = self.get_financial_option(underlying_code)
 
             dfs.append(option_df)
 
         return pd.concat(dfs, ignore_index=True)
 
 
-def get_financial_option_quotes(exchange_name,  calendar = optshare.Calendar(), current_datetime=None, display=True):
+def get_financial_option_quotes(exchange_name, calendar = optshare.Calendar(), display=True):
     """ Financial option quotes
 
     :param exchange_name: exchange name
     :type exchange_name: str
-    :param calendar: define transaction calendar
+    :param calendar: define transaction calendar, default optshare.Calendar
     :type calendar: optshare.Calendar object
-    :param current_datetime: current datetime
-    :type current_datetime: datetime.date or None
     :param display: Determine whether to display the variety of option quotes when fetching data
     :return: Supported financial option t-quotes in given exchange name
     :rtype: pandas.DataFrame
     """
     financial_option = FinancialOption(exchange_name, calendar)
-    return financial_option.get_option_quotes(current_datetime=current_datetime, display=display)
+    return financial_option.get_option_quotes(display=display)
 
 
 if __name__ == '__main__':
@@ -197,4 +186,4 @@ if __name__ == '__main__':
         f_quotes = get_financial_option_quotes(exchange_name=name)
         print(f_quotes)
         # f_quotes['挂钩标的代码'] = f_quotes['挂钩标的代码'].apply('="{}"'.format)
-        # f_quotes.to_csv("test_" + name + ".csv")
+        f_quotes.to_csv("test_" + name + ".csv")

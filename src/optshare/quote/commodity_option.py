@@ -88,20 +88,15 @@ class CommodityOption:
 
         return underlying_code, expiry_date, option_strike
 
-    def get_commodity_option(self, underlying_asset_code, current_datetime = None):
+    def get_commodity_option(self, underlying_asset_code):
         """ Return option t quote given underlying asset code
 
         :param underlying_asset_code: underlyng asset code of the commodity option
         :type underlying_asset_code: str
-        :param current_datetime: current datetime
-        :type current_datetime: datetime.date or None
         :return: the t-quotes of the selected commodity option variety
         :rtype: pandas.DataFrame
         """
-        if current_datetime is None:
-            current_datetime = optshare.get_market_time(datetime.now())
-        else:
-            current_datetime = optshare.get_market_time(current_datetime)
+        current_datetime = optshare.get_market_time(datetime.now())
 
         current_datetime_str = current_datetime.strftime('%Y-%m-%d %H:%M')
 
@@ -140,21 +135,14 @@ class CommodityOption:
         option_quote['日期'] = current_datetime_str
 
         return option_quote
-    def get_option_quotes(self, current_datetime = None, display = True):
+    def get_option_quotes(self, display = True):
         """ Return all option t-quotes in given exchange name
 
-        :param current_datetime: current datetime
-        :type current_datetime: datetime.date or None
         :param display: Determine whether to display the variety of option quotes when fetching data
         :type display: bool, default True
         :return: Supported commodity option t-quotes in given exchange name
         :rtype: pandas.DataFrame
         """
-
-        if current_datetime is None:
-            current_datetime = optshare.get_market_time(datetime.now())
-        else:
-            current_datetime = optshare.get_market_time(current_datetime)
 
         dfs = []
         commodity_option_df = optshare.get_meta_data(exchange_name=self.exchange_name)
@@ -163,25 +151,23 @@ class CommodityOption:
         for underlying_asset_code in underlying_asset_codes:
             if display:
                 print("fetch option quotes for ", code_dict[underlying_asset_code])
-            dfs.append(self.get_commodity_option(underlying_asset_code, current_datetime))
+            dfs.append(self.get_commodity_option(underlying_asset_code))
 
         return pd.concat(dfs, ignore_index=True)
 
-def get_commodity_option_quotes(exchange_name, calendar = optshare.Calendar(), current_datetime=None, display=True):
+def get_commodity_option_quotes(exchange_name, calendar = optshare.Calendar(), display=True):
     """ Commodity option quotes
 
     :param exchange_name: exchange name
     :type exchange_name: str
     :param calendar: define transaction calendar
     :type calendar: optshare.Calendar object
-    :param current_datetime: current datetime
-    :type current_datetime: datetime.date or None
     :param display: Determine whether to display the variety of option quotes when fetching data
     :return: Supported commodity option t-quotes in given exchange name
     :rtype: pandas.DataFrame
     """
     commodity_option = CommodityOption(exchange_name, calendar)
-    return commodity_option.get_option_quotes(current_datetime = current_datetime, display = display)
+    return commodity_option.get_option_quotes(display = display)
 
 if __name__ == '__main__':
     exchange_names = ['dce', 'shfe', 'czce', 'ine']

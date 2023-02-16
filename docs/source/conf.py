@@ -23,7 +23,7 @@ copyright = '2023, Yu Lu'
 author = 'Yu Lu'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.61'
+release = '0.1.62'
 
 
 # -- General configuration ---------------------------------------------------
@@ -53,7 +53,7 @@ language = 'en'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 
-master_doc = 'index'
+master_doc = 'introduction'
 
 exclude_patterns = ['**.ipynb_checkpoints']
 

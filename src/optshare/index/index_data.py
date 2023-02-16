@@ -3,9 +3,9 @@ import pandas as pd
 import json
 
 def get_current_index():
-    """ target website: https://quote.eastmoney.com/center/hszs.html 支持沪深重要指数、上证指数、深证系列指数、指数成分、以及中证系列指数
+    """ target website: https://quote.eastmoney.com/center/hszs.html 支持沪深重要指数、上证指数、深证系列指数、中证系列指数（包括指数成分），以及全部ETF数据
 
-    :returns: a row with detailed data given individual index symbol, otherwise whole data if index symbol is none
+    :returns: current ETF and index data
     :rtype: pandas.DataFrame
     """
     url = 'https://79.push2.eastmoney.com/api/qt/clist/get'
@@ -58,11 +58,11 @@ def get_current_index():
     return index_df
 
 
-def get_daily_index(index_symbol, start_date, end_date):
-    """ 东方财富网-中国股票指数-行情数据 https://quote.eastmoney.com/concept/sh603777.html?from=classic
+def get_daily_data(symbol, start_date, end_date):
+    """ 东方财富网-行情中心 http://quote.eastmoney.com/center，支持个股、指数、ETF日频历史数据获取
 
-    :param index_symbol: index symbol
-    :type index_symbol: str
+    :param symbol: index symbol
+    :type symbol: str
     :param start_date: start dateutils
     :type start_date: str, 'yyyymmdd'
     :param end_date: end dateutils
@@ -73,7 +73,7 @@ def get_daily_index(index_symbol, start_date, end_date):
 
     url = "http://push2his.eastmoney.com/api/qt/stock/kline/get"
     params = {
-        "secid": f"1.{index_symbol}",
+        "secid": f"1.{symbol}",
         "ut": "7eea3edcaed734bea9cbfc24409ed989",
         "fields1": "f1,f2,f3,f4,f5,f6",
         "fields2": "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61",
@@ -86,11 +86,11 @@ def get_daily_index(index_symbol, start_date, end_date):
     r = requests.get(url, params=params)
     data_json = r.json()
     if data_json["data"] is None:
-        params.update(secid=f"0.{index_symbol}")
+        params.update(secid=f"0.{symbol}")
         r = requests.get(url, params=params)
         data_json = r.json()
         if data_json["data"] is None:
-            params.update(secid=f"2.{index_symbol}")
+            params.update(secid=f"2.{symbol}")
 
     r = requests.get(url, params=params)
     data_json = r.json()
@@ -100,7 +100,7 @@ def get_daily_index(index_symbol, start_date, end_date):
         )
     except:
         # 兼容 000859(中证国企一路一带) 和 000861(中证央企创新)
-        params.update(secid=f"2.{index_symbol}")
+        params.update(secid=f"2.{symbol}")
 
         r = requests.get(url, params=params)
         data_json = r.json()
@@ -141,5 +141,5 @@ if __name__ == "__main__":
     # test get current index
     whole_index_df = get_current_index()
     print(whole_index_df)
-    daily_df = get_daily_index(index_symbol='510050', start_date='20201130', end_date='20201230')
+    daily_df = get_daily_data(symbol='510050', start_date='20201130', end_date='20201230')
     print(daily_df)

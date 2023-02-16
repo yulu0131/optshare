@@ -1,10 +1,18 @@
 ============================================================
 `OPTshare`_ 项目介绍
 ============================================================
+.. toctree::
+   :maxdepth: 1
+   :hidden:
 
-.. note::
+   期权Wiki <wiki>
+   使用示例 <usage>
+   代码API references <api>
 
-   本文档最后更新于2023/02/09。
+.. warning::
+
+   本文档最后更新于2023/02/16。
+
 
 首先要特别感谢 `AKshare`_ 在代码和项目开发上对本项目提供的借鉴和学习的机会!
 
@@ -12,7 +20,15 @@
 
 `OPTshare`_ 的数据主要来源为官方网站以及 `东方财富`_ 财经数据网站公布的原始数据。
 
+.. note::
+
+   Please visit `OPTshare's Github`_ for source code or visit `Github Issues`_ if you have any question!
+
 .. _东方财富: https://www.eastmoney.com/
 .. _AKshare: https://github.com/akfamily/akshare
 .. _OPTshare: https://github.com/yulu0131/optshare
 
+
+.. _OPTshare's Github: https://github.com/yulu0131/optshare
+
+.. _Github Issues: https://github.com/yulu0131/optshare/issues

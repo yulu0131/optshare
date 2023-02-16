@@ -9,9 +9,9 @@ class Calendar:
     """
 
     def __init__(self, filename=None):
-        """ Specify holiday list with a txt file
+        """ Specify holiday list with a txt file. If cannot find file given filename or filename is none, use remote url instead. The remote url is https://raw.githubusercontent.com/yulu0131/optshare/master/src/optshare/dateutils/China.txt.
 
-        :param filename: a txt file with holiday list, use remote url instead if cannot find file or filename is None
+        :param filename: a txt file with holiday list, use remote url instead if cannot find file or filename is None.
         :type filename: str or None
         """
         self.filename = filename
