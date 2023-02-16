@@ -53,7 +53,7 @@ language = 'en'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 
-master_doc = 'introduction'
+master_doc = 'index'
 
 exclude_patterns = ['**.ipynb_checkpoints']
 
