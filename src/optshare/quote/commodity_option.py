@@ -1,7 +1,7 @@
 
 """ Current Commodity Option T-type Quotation
 
-For the convenience of future research, Raw data is parsed and re-formulated as T-type quotation.
+For the convenience of future research, raw data is parsed and re-formulated as T-type quotation.
 
 The format of T-type quotation data:
 
