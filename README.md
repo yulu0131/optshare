@@ -1,10 +1,10 @@
-# Optshare
+# OptShare
 
 Special thanks to [AKshare](https://github.com/akfamily/akshare) for the opportunity to learn from this project in terms of code and project development.
 
-[Optshare](https://github.com/yulu0131/optshare) is a Python-based option data interface library, designed to provide easy-to-use option data, index data, and market yield data.
+[OptShare](https://github.com/yulu0131/optshare) is a Python-based option data interface library, designed to provide easy-to-use option data, index data, and market yield data.
 
-The main source of [Optshare](https://github.com/yulu0131/optshare) data is the official website and raw data published by [eastmoney](https://www.eastmoney.com/) financial website.
+The main source of [OptShare](https://github.com/yulu0131/optshare) data is the official website and raw data published by [eastmoney](https://www.eastmoney.com/) financial website.
 
 - Documentation: [文档链接](https://optshare.readthedocs.io/en/latest/) 
 
