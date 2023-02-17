@@ -1,4 +1,4 @@
 optshare~=0.1.62
 requests~=2.28.0
 pandas~=1.4.3
-setuptools~=58.1.0
+lxml~=4.9.0

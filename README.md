@@ -11,7 +11,7 @@ The main source of [Optshare](https://github.com/yulu0131/optshare) data is the 
 ## Installation
 
 ```
-pip install optshare --upgrade
+pip install optshare
 ```
 
 ## Usage

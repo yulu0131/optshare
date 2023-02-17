@@ -108,7 +108,7 @@ def get_lpr(start_date, end_date):
 
 
 if __name__ == '__main__':
-    test_shibor_df = get_shibor()
+    test_shibor_df = get_shibor(start_date = '20211101', end_date = '20220601')
     print(test_shibor_df)
-    test_lpr_df = get_lpr()
+    test_lpr_df = get_lpr(start_date = '20211101', end_date = '20220601')
     print(test_lpr_df)
