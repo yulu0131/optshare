@@ -23,6 +23,8 @@
 安装方式
 ==================
 
+支持环境 Python 3.9(64位)及以上版本
+
 .. code-block::
 
    pip install optshare --upgrade

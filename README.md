@@ -9,7 +9,7 @@ The main source of [Optshare](https://github.com/yulu0131/optshare) data is the 
 - Documentation: [文档链接](https://optshare.readthedocs.io/en/latest/) 
 
 ## Installation
-
+Python 3.9(64-bit) or later
 ```
 pip install optshare
 ```
