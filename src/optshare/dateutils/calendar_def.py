@@ -9,7 +9,7 @@ class Calendar:
     """
 
     def __init__(self, filename=None):
-        """ Specify holiday list with a txt file. If cannot find file given filename or filename is none, use remote url instead. The remote url is https://raw.githubusercontent.com/yulu0131/optshare/master/src/optshare/dateutils/China.txt.
+        """ Specify holiday list with a txt file. If cannot find file given filename or filename is none, use remote url instead. The remote url is https://gitee.com/luluUCD/optshare/raw/master/src/optshare/dateutils/China.txt.
 
         :param filename: a txt file with holiday list, use remote url instead if cannot find file or filename is None.
         :type filename: str or None
@@ -19,7 +19,7 @@ class Calendar:
         try:
             if self.filename is None:
                 response = requests.get(
-                    'https://raw.githubusercontent.com/yulu0131/optshare/master/src/optshare/dateutils/China.txt')
+                    'https://gitee.com/luluUCD/optshare/raw/master/src/optshare/dateutils/China.txt')
                 holiday_dates = list(filter(None, response.text.split('\n')))
 
             else:
@@ -30,7 +30,7 @@ class Calendar:
         except FileNotFoundError:
             warnings.warn("Cannot recognize filename, use remote Chinese holiday list instead")
             response = requests.get(
-                'https://raw.githubusercontent.com/yulu0131/optshare/master/src/optshare/dateutils/China.txt')
+                'https://gitee.com/luluUCD/optshare/raw/master/src/optshare/dateutils/China.txt')
             holiday_dates = list(filter(None, response.text.split('\n')))
 
         self._holiday_rule = [datetime.strptime(holiday_date.rstrip('\n'), "%Y-%m-%d").date() for holiday_date in
